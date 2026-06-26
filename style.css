@@ -412,6 +412,205 @@ body {
 }
 
 /* ======================================== */
+/* ===== MULTI-SONG RESULT STYLES ===== */
+/* ======================================== */
+
+/* Mood Overview */
+.mood-overview {
+    background: #f8f9fc;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    border: 1px solid #e5e7eb;
+}
+
+.mood-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.mood-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.mood-title .highlight {
+    color: #4a6cf7;
+    text-transform: capitalize;
+}
+
+.mood-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.meta-tag {
+    background: #ffffff;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+}
+
+.mood-description {
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+/* ===== SONG LIST ===== */
+.song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f8f9fc;
+    border-radius: 12px;
+    padding: 16px 20px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.25s ease;
+}
+
+.song-item:hover {
+    background: #ffffff;
+    border-color: #4a6cf7;
+    box-shadow: 0 4px 16px rgba(74, 108, 247, 0.08);
+    transform: translateX(4px);
+}
+
+.song-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #4a6cf7;
+    min-width: 32px;
+    text-align: center;
+    opacity: 0.5;
+}
+
+.song-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.song-title-small {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin: 0;
+}
+
+.song-artist-small {
+    font-size: 0.9rem;
+    color: #4a6cf7;
+    font-weight: 500;
+    margin: 0;
+}
+
+.song-meta-small {
+    font-size: 0.8rem;
+    color: #8b8fa8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.song-meta-small .dot {
+    color: #d1d5db;
+}
+
+.btn-small {
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    border-radius: 50px;
+}
+
+.btn-spotify {
+    background: #1DB954;
+    color: #ffffff;
+    border: none;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.btn-spotify:hover {
+    background: #1ed760;
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(29, 185, 84, 0.3);
+}
+
+/* ===== RESPONSIVE UPDATES ===== */
+@media (max-width: 640px) {
+    .mood-overview {
+        padding: 20px;
+    }
+
+    .mood-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mood-title {
+        font-size: 1.2rem;
+    }
+
+    .song-item {
+        flex-wrap: wrap;
+        padding: 14px 16px;
+        gap: 10px;
+    }
+
+    .song-number {
+        font-size: 1rem;
+        min-width: 24px;
+    }
+
+    .song-title-small {
+        font-size: 0.95rem;
+    }
+
+    .song-artist-small {
+        font-size: 0.8rem;
+    }
+
+    .btn-small {
+        padding: 6px 14px;
+        font-size: 0.75rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .song-item {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .song-info {
+        flex: 1 1 60%;
+    }
+
+    .btn-small {
+        flex: 1 1 100%;
+    }
+}
+
+/* ======================================== */
 /* ===== RESPONSIVE DESIGN ===== */
 /* ======================================== */
 
