@@ -555,6 +555,8 @@ body {
     box-shadow: 0 4px 16px rgba(29, 185, 84, 0.3);
 }
 
+
+
 /* ===== RESPONSIVE UPDATES ===== */
 @media (max-width: 640px) {
     .mood-overview {
