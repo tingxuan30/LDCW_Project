@@ -72,9 +72,29 @@ $playlist = $_SESSION['playlist'];
             <?php foreach ($playlist as $index => $song): ?>
             <div class="song-item playlist-item">
                 <div class="song-number"><?php echo $index + 1; ?></div>
+            
+                <div class="song-image-container">
+                    <?php 
+                    $imagePath = isset($song['image']) ? $song['image'] : 'image/default-album.jpg';
+                    ?>
+                    <img src="<?php echo htmlspecialchars($imagePath); ?>" 
+                         alt="<?php echo htmlspecialchars($song['title']); ?> album art" 
+                         class="song-album-image"
+                         onerror="this.src='image/default-album.jpg'">
+                </div>
+                
                 <div class="song-info">
                     <h3 class="song-title-small"><?php echo htmlspecialchars($song['title']); ?></h3>
                     <p class="song-artist-small"><?php echo htmlspecialchars($song['artist']); ?></p>
+                    <?php if (isset($song['year'])): ?>
+                    <div class="song-meta-small">
+                        <span><?php echo $song['year']; ?></span>
+                        <?php if (isset($song['tempo'])): ?>
+                        <span class="dot">·</span>
+                        <span><?php echo $song['tempo']; ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 <div class="action-buttons-group">
                     <a href="<?php echo $song['spotify']; ?>" target="_blank" class="btn btn-small btn-spotify">

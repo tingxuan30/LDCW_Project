@@ -70,12 +70,9 @@ $songs = $recommendationData['songs'];
                 <?php foreach ($songs as $index => $song): ?>
                 <div class="song-item">
                     <div class="song-number"><?php echo $index + 1; ?></div>
-                    <!-- SONG IMAGE - ADDED THIS SECTION -->
                     <div class="song-image-container">
                         <?php 
-                        // Check if image exists, otherwise use a default
                         $imagePath = isset($song['image']) ? $song['image'] : 'image/default-album.jpg';
-                        // You might want to add a check if the file exists
                         ?>
                         <img src="<?php echo htmlspecialchars($imagePath); ?>" 
                              alt="<?php echo htmlspecialchars($song['title']); ?> album art" 
@@ -95,7 +92,14 @@ $songs = $recommendationData['songs'];
                         <a href="<?php echo $song['spotify']; ?>" target="_blank" class="btn btn-small btn-spotify">
                             ▶ Play
                         </a>
-                        <button onclick="addToPlaylist('<?php echo htmlspecialchars($song['title']); ?>', '<?php echo htmlspecialchars($song['artist']); ?>', '<?php echo $song['spotify']; ?>')" 
+                        <button onclick="addToPlaylist(
+                                    '<?php echo htmlspecialchars($song['title']); ?>', 
+                                    '<?php echo htmlspecialchars($song['artist']); ?>', 
+                                    '<?php echo $song['spotify']; ?>', 
+                                    '<?php echo isset($song['image']) ? $song['image'] : 'image/default-album.jpg'; ?>',
+                                    '<?php echo $song['year'] ?? ''; ?>',
+                                    '<?php echo $song['tempo'] ?? ''; ?>'
+                                )" 
                                 class="btn btn-small btn-playlist">
                             Add to Playlist
                         </button>
@@ -122,7 +126,7 @@ $songs = $recommendationData['songs'];
 </html>
 
 <script>
-    function addToPlaylist(title, artist, spotify) {
+    function addToPlaylist(title, artist, spotify, image, year, tempo) {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'playlist_data.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -132,6 +136,8 @@ $songs = $recommendationData['songs'];
                     const response = JSON.parse(this.responseText);
                     if (response.success) {
                         alert('✅ "' + title + '" added to your playlist!');
+                        // Optional: Update playlist count in navigation
+                        updatePlaylistCount();
                     } else {
                         alert('⚠️ ' + response.message);
                     }
@@ -141,7 +147,10 @@ $songs = $recommendationData['songs'];
             }
         };
         xhr.send('action=add&title=' + encodeURIComponent(title) + 
-                 '&artist=' + encodeURIComponent(artist) + 
-                 '&spotify=' + encodeURIComponent(spotify));
+                '&artist=' + encodeURIComponent(artist) + 
+                '&spotify=' + encodeURIComponent(spotify) +
+                '&image=' + encodeURIComponent(image || 'image/default-album.jpg') +
+                '&year=' + encodeURIComponent(year || '') +
+                '&tempo=' + encodeURIComponent(tempo || ''));
     }
 </script>
