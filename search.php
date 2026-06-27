@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['q']) && !empty($_GET['q'
     // ============================================
     function searchSongs($query) {
         // Load all songs from the recommendation database
-        require_once 'song_database.php'; // We'll extract this to a separate file
+        require_once 'song_database.php';
         
         $allSongs = getAllSongs();
         $results = [];
@@ -117,6 +117,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['q']) && !empty($_GET['q'
                 <?php foreach ($searchResults as $index => $song): ?>
                 <div class="song-item search-item">
                     <div class="song-number"><?php echo $index + 1; ?></div>
+                
+                    <div class="song-image-container">
+                        <?php 
+                        $imagePath = isset($song['image']) ? $song['image'] : 'image/default-album.jpg';
+                        ?>
+                        <img src="<?php echo htmlspecialchars($imagePath); ?>" 
+                             alt="<?php echo htmlspecialchars($song['title']); ?> album art" 
+                             class="song-album-image"
+                             onerror="this.src='image/default-album.jpg'">
+                    </div>
+                    
                     <div class="song-info">
                         <h3 class="song-title-small"><?php echo htmlspecialchars($song['title']); ?></h3>
                         <p class="song-artist-small"><?php echo htmlspecialchars($song['artist']); ?></p>
@@ -132,7 +143,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['q']) && !empty($_GET['q'
                         <a href="<?php echo $song['spotify']; ?>" target="_blank" class="btn btn-small btn-spotify">
                             ▶ Play
                         </a>
-                        <button onclick="addToPlaylist('<?php echo htmlspecialchars($song['title']); ?>', '<?php echo htmlspecialchars($song['artist']); ?>', '<?php echo $song['spotify']; ?>')" class="btn btn-small btn-playlist">
+                        <button onclick="addToPlaylist(
+                                '<?php echo htmlspecialchars($song['title']); ?>', 
+                                '<?php echo htmlspecialchars($song['artist']); ?>', 
+                                '<?php echo $song['spotify']; ?>', 
+                                '<?php echo isset($song['image']) ? $song['image'] : 'image/default-album.jpg'; ?>',
+                                '<?php echo $song['year'] ?? ''; ?>',
+                                '<?php echo $song['tempo'] ?? ''; ?>'
+                            )" 
+                            class="btn btn-small btn-playlist">
                             Add to Playlist
                         </button>
                     </div>
@@ -151,19 +170,31 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['q']) && !empty($_GET['q'
     </div>
 
     <script>
-        function addToPlaylist(title, artist, spotify) {
-            // Send AJAX request to add song to playlist
+        function addToPlaylist(title, artist, spotify, image, year, tempo) {
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'playlist_data.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function() {
                 if (this.status === 200) {
-                    alert('✅ "' + title + '" added to your playlist!');
+                    try {
+                        const response = JSON.parse(this.responseText);
+                        if (response.success) {
+                            alert('✅ "' + title + '" added to your playlist!');
+                            updatePlaylistCount();
+                        } else {
+                            alert('⚠️ ' + response.message);
+                        }
+                    } catch(e) {
+                        alert('✅ "' + title + '" added to your playlist!');
+                    }
                 }
             };
             xhr.send('action=add&title=' + encodeURIComponent(title) + 
-                     '&artist=' + encodeURIComponent(artist) + 
-                     '&spotify=' + encodeURIComponent(spotify));
+                    '&artist=' + encodeURIComponent(artist) + 
+                    '&spotify=' + encodeURIComponent(spotify) +
+                    '&image=' + encodeURIComponent(image || 'image/default-album.jpg') +
+                    '&year=' + encodeURIComponent(year || '') +
+                    '&tempo=' + encodeURIComponent(tempo || ''));
         }
     </script>
 </body>
