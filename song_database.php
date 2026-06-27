@@ -19,12 +19,12 @@ function getAllSongs() {
                     'image' => 'image/flowers.png'
                 ],
                 [
-                    'title' => 'Dance The Night',
-                    'artist' => 'Dua Lipa',
-                    'year' => '2023',
-                    'tempo' => '110 BPM',
-                    'spotify' => 'https://open.spotify.com/track/1C0Qy3BcZsd0zYqapB8NmD',
-                    'image' => 'image/x.jpg'
+                    'title' => 'Espresso',
+                    'artist' => 'Sabrina Carpenter',
+                    'year' => '2024',
+                    'tempo' => '105 BPM',
+                    'spotify' => 'https://open.spotify.com/track/2qSkIjg1o9h3YT9RAgYN75',
+                    'image' => 'image/X.jpg'
                 ],
                 [
                     'title' => 'Watermelon Sugar',
@@ -58,20 +58,20 @@ function getAllSongs() {
             'description' => 'Emotional ballads to help you process and reflect on your feelings.',
             'songs' => [
                 [
-                    'title' => 'Drivers License',
-                    'artist' => 'Olivia Rodrigo',
-                    'year' => '2021',
-                    'tempo' => '72 BPM',
-                    'spotify' => 'https://open.spotify.com/track/5wV9k5KZdlmB8kZQHuWxGZ',
-                    'image' => 'image/x.jpg'
+                    'title' => 'Lose Control',
+                    'artist' => 'Teddy Swims',
+                    'year' => '2023',
+                    'tempo' => '84 BPM',
+                    'spotify' => 'https://open.spotify.com/track/17phhZDn6oGtzMe56NuWvj',
+                    'image' => 'image/X.jpg'
                 ],
                 [
-                    'title' => 'All Too Well (10 Minute Version)',
-                    'artist' => 'Taylor Swift',
-                    'year' => '2021',
-                    'tempo' => '92 BPM',
-                    'spotify' => 'https://open.spotify.com/track/5enxwA8aAbwZbf5qCHORXi',
-                    'image' => 'image/x.jpg'
+                    'title' => 'Die For You',
+                    'artist' => 'The Weeknd',
+                    'year' => '2022',
+                    'tempo' => '134 BPM',
+                    'spotify' => 'https://open.spotify.com/track/2LBqCSwhJGcFQeTHMVGwy3',
+                    'image' => 'image/X.jpg'
                 ],
                 [
                     'title' => 'Someone You Loved',
@@ -129,21 +129,21 @@ function getAllSongs() {
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
-                    'title' => 'Montero (Call Me By Your Name)',
-                    'artist' => 'Lil Nas X',
-                    'year' => '2021',
-                    'tempo' => '178 BPM',
-                    'spotify' => 'https://open.spotify.com/track/1qEiqn7qyskhPcwwrZffc0',
-                    'image' => 'image/flevitating.jpg'
+                    'title' => 'Rich Flex',
+                    'artist' => 'Drake & 21 Savage',
+                    'year' => '2022',
+                    'tempo' => '135 BPM',
+                    'spotify' => 'https://open.spotify.com/track/1bDbXMyjaUIooNwFE9wn0N',
+                    'image' => 'image/X.jpg'
                 ],
                 [
-                    'title' => 'Industry Baby',
-                    'artist' => 'Lil Nas X & Jack Harlow',
-                    'year' => '2021',
-                    'tempo' => '150 BPM',
-                    'spotify' => 'https://open.spotify.com/track/7Ld5mXbFPvd1dOgOWAUMov',
-                    'image' => 'image/flevitating.jpg'
-                ]
+                    'title' => 'Uptown Funk',
+                    'artist' => 'Mark Ronson ft. Bruno Mars',
+                    'year' => '2014',
+                    'tempo' => '115 BPM',
+                    'spotify' => 'https://open.spotify.com/track/32OlwWuMpZ6b0aN2RZOeMS',
+                    'image' => 'image/X.jpg'
+                ],
             ]
         ],
         'chill' => [
@@ -151,47 +151,47 @@ function getAllSongs() {
             'energy' => 'Very Low',
             'description' => 'Calming tracks for relaxation and peaceful moments.',
             'songs' => [
-                [
-                    'title' => 'Stargazing',
-                    'artist' => 'The Neighbourhood',
-                    'year' => '2020',
-                    'tempo' => '85 BPM',
-                    'spotify' => 'https://open.spotify.com/track/3X8OcjPnpY8eXgiKZxfYph',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
-                    'title' => 'Heat Waves',
-                    'artist' => 'Glass Animals',
-                    'year' => '2020',
-                    'tempo' => '81 BPM',
-                    'spotify' => 'https://open.spotify.com/track/6lz9rPJ7TWhR2MudXkCz2y',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
-                    'title' => 'Apocalypse',
-                    'artist' => 'Cigarettes After Sex',
-                    'year' => '2019',
-                    'tempo' => '102 BPM',
-                    'spotify' => 'https://open.spotify.com/track/3AVrVz5rK8WrWTOqEYsgsD',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
-                    'title' => 'Space Song',
-                    'artist' => 'Beach House',
-                    'year' => '2019',
-                    'tempo' => '80 BPM',
-                    'spotify' => 'https://open.spotify.com/track/7H0zh83Y2SxgH8rjscFdx0',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
-                    'title' => 'Daylight',
-                    'artist' => 'Taylor Swift',
-                    'year' => '2019',
-                    'tempo' => '88 BPM',
-                    'spotify' => 'https://open.spotify.com/track/2TzS6EupL5i3TM5OtkUMSE',
-                    'image' => 'image/flevitating.jpg'
-                ]
-            ]
+                        [
+                            'title' => 'Ocean Eyes',
+                            'artist' => 'Billie Eilish',
+                            'year' => '2016',
+                            'tempo' => '80 BPM',
+                            'spotify' => 'https://open.spotify.com/track/7hDVYcQq6MxkdJGweuCtl9',
+                            'image' => 'image/flevitating.jpg'
+                        ],
+                        [
+                            'title' => 'Tip Top',
+                            'artist' => 'HYBS',
+                            'year' => '2023',
+                            'tempo' => '122 BPM',
+                            'spotify' => 'https://open.spotify.com/track/0MJ5wKsPEeihONNfugHGy7?si=92470cb7183444df',
+                            'image' => 'image/flevitating.jpg'
+                        ],
+                        [
+                            'title' => 'Better Together',
+                            'artist' => 'Jack Johnson',
+                            'year' => '2005',
+                            'tempo' => '72 BPM',
+                            'spotify' => 'https://open.spotify.com/track/2iXdwVdzA0KrI2Q0iZNJbX',
+                            'image' => 'image/flevitating.jpg'
+                        ],
+                        [
+                            'title' => 'Soft Spot',
+                            'artist' => 'Keshi',
+                            'year' => '2024',
+                            'tempo' => '60 BPM',
+                            'spotify' => 'https://open.spotify.com/track/2aL4lMGhWdPpyPL6COPou7?si=0729247b5f6045e1',
+                            'image' => 'image/flevitating.jpg'
+                        ],
+                        [
+                            'title' => 'Paris in the Rain',
+                            'artist' => 'LAUV',
+                            'year' => '2018',
+                            'tempo' => '81 BPM',
+                            'spotify' => 'https://open.spotify.com/track/2WdAV1VqmllcEznKlVOFxG?si=22584d2c14784fa7',
+                            'image' => 'image/flevitating.jpg'
+                        ]
+                    ]
         ],
         'romantic' => [
             'mood' => 'Romantic',
@@ -207,11 +207,11 @@ function getAllSongs() {
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
-                    'title' => 'Fall In Love',
-                    'artist' => 'BENEE ft. Gus Dapperton',
-                    'year' => '2021',
+                    'title' => 'Love Story',
+                    'artist' => 'Taylor Swift',
+                    'year' => '2008',
                     'tempo' => '107 BPM',
-                    'spotify' => 'https://open.spotify.com/track/4lRrHVTzJALZt0rZjvLDJG',
+                    'spotify' => 'https://open.spotify.com/track/1D4PL9B8gOg78jiHg3FvBb?si=2e530758f8674887',
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
@@ -270,19 +270,19 @@ function getAllSongs() {
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
-                    'title' => 'The Greatest',
-                    'artist' => 'Sia ft. Kendrick Lamar',
-                    'year' => '2016',
-                    'tempo' => '140 BPM',
-                    'spotify' => 'https://open.spotify.com/track/7HmbwW39tPlqPDHcN8n2gR',
+                    'title' => 'Rise Up',
+                    'artist' => 'Andra Day',
+                    'year' => '2015',
+                    'tempo' => '72 BPM',
+                    'spotify' => 'https://open.spotify.com/track/0tV8pOpiNsKqUys0ilUcXz',
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
-                    'title' => 'Courage To Change',
-                    'artist' => 'Sia',
-                    'year' => '2020',
-                    'tempo' => '125 BPM',
-                    'spotify' => 'https://open.spotify.com/track/5KMRgOGCokWmzO3sObi9gW',
+                    'title' => 'Whatever It Takes',
+                    'artist' => 'Imagine Dragons',
+                    'year' => '2017',
+                    'tempo' => '135 BPM',
+                    'spotify' => 'https://open.spotify.com/track/6Qn5zhYkTa37e91HC1D7lb',
                     'image' => 'image/flevitating.jpg'
                 ]
             ]
@@ -325,11 +325,11 @@ function getAllSongs() {
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
-                    'title' => 'Teenage Dream',
-                    'artist' => 'Katy Perry',
-                    'year' => '2021',
-                    'tempo' => '120 BPM',
-                    'spotify' => 'https://open.spotify.com/track/5XH9Q2UGfKHkwkSHLJ6HBA',
+                    'title' => 'Blinding Lights',
+                    'artist' => 'The Weeknd',
+                    'year' => '2019',
+                    'tempo' => '171 BPM',
+                    'spotify' => 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b',
                     'image' => 'image/flevitating.jpg'
                 ]
             ]
@@ -340,22 +340,6 @@ function getAllSongs() {
             'description' => 'Intense tracks to help release frustration and tension.',
             'songs' => [
                 [
-                    'title' => 'Emo Girl',
-                    'artist' => 'Machine Gun Kelly ft. WILLOW',
-                    'year' => '2022',
-                    'tempo' => '165 BPM',
-                    'spotify' => 'https://open.spotify.com/track/7Fm5dKpDCTntnNQcYq6pqM',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
-                    'title' => 'My Ex\'s Best Friend',
-                    'artist' => 'Machine Gun Kelly ft. blackbear',
-                    'year' => '2020',
-                    'tempo' => '160 BPM',
-                    'spotify' => 'https://open.spotify.com/track/70rSUYxSZbVxlK9R2Hl8xO',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
                     'title' => 'Karma',
                     'artist' => 'Taylor Swift',
                     'year' => '2022',
@@ -364,19 +348,35 @@ function getAllSongs() {
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
-                    'title' => 'Vigilante Shit',
-                    'artist' => 'Taylor Swift',
-                    'year' => '2022',
-                    'tempo' => '80 BPM',
-                    'spotify' => 'https://open.spotify.com/track/1xw6ZbGdiVY10u1dR1YSNB',
+                    'title' => 'Not Like Us',
+                    'artist' => 'Kendrick Lamar',
+                    'year' => '2024',
+                    'tempo' => '100 BPM',
+                    'spotify' => 'https://open.spotify.com/track/6AI3ezQ4o3HUoP6Dhudph3',
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
-                    'title' => 'Happier Than Ever (Edit)',
-                    'artist' => 'Billie Eilish',
-                    'year' => '2021',
-                    'tempo' => '120 BPM',
-                    'spotify' => 'https://open.spotify.com/track/7HkLpS3ukD9Yw2FqtZitR4',
+                    'title' => 'One Step Closer',
+                    'artist' => 'Linkin Park',
+                    'year' => '2000',
+                    'tempo' => '95 BPM',
+                    'spotify' => 'https://open.spotify.com/track/3K4HG9evC7dg3N0R9cYqk4',
+                    'image' => 'image/flevitating.jpg'
+                ],
+                [
+                    'title' => 'Killing In The Name',
+                    'artist' => 'Rage Against The Machine',
+                    'year' => '1992',
+                    'tempo' => '110 BPM',
+                    'spotify' => 'https://open.spotify.com/track/59WN2psjkt1tyaxjspN8fp',
+                    'image' => 'image/flevitating.jpg'
+                ],
+                [
+                    'title' => 'Lose Yourself',
+                    'artist' => 'Eminem',
+                    'year' => '2002',
+                    'tempo' => '86 BPM',
+                    'spotify' => 'https://open.spotify.com/track/5Z01UMMf7V1o0MzF86s6WJ',
                     'image' => 'image/flevitating.jpg'
                 ]
             ]
@@ -386,6 +386,14 @@ function getAllSongs() {
             'energy' => 'Low',
             'description' => 'Soothing tracks to ease anxiety and promote mental clarity.',
             'songs' => [
+                [
+                    'title' => 'ANXIETY',
+                    'artist' => 'Sleepy Hallow ft. Doechii',
+                    'year' => '2025',
+                    'tempo' => '140 BPM',
+                    'spotify' => 'https://open.spotify.com/track/1musbempyJAw5gfSKZHXP9?si=136651ca60fc49b9',
+                    'image' => 'image/flevitating.jpg'
+                ],
                 [
                     'title' => 'Lose You To Love Me',
                     'artist' => 'Selena Gomez',
@@ -398,24 +406,16 @@ function getAllSongs() {
                     'title' => 'Hold On',
                     'artist' => 'Adele',
                     'year' => '2021',
-                    'tempo' => '70 BPM',
-                    'spotify' => 'https://open.spotify.com/track/6sSKnP5p4QWqKpUDQNAwLK',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
-                    'title' => 'My Tears Ricochet',
-                    'artist' => 'Taylor Swift',
-                    'year' => '2020',
-                    'tempo' => '85 BPM',
-                    'spotify' => 'https://open.spotify.com/track/1MgT5flMsO6STqhzVnQFmZ',
+                    'tempo' => '82 BPM',
+                    'spotify' => 'https://open.spotify.com/track/6bGMSP3H9YqkmaLnaJTIoF?si=ec04c8eb6dad431f',
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
                     'title' => 'Everybody Wants To Rule The World',
                     'artist' => 'Lorde',
-                    'year' => '2021',
-                    'tempo' => '110 BPM',
-                    'spotify' => 'https://open.spotify.com/track/4D2ESLtxA8dwH4w2EtfgbV',
+                    'year' => '2013',
+                    'tempo' => '82 BPM',
+                    'spotify' => 'https://open.spotify.com/track/3S1tTwSKIZgf4QGltFyCxM?si=343813b51eab4427',
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
@@ -435,34 +435,34 @@ function getAllSongs() {
             'songs' => [
                 [
                     'title' => 'Grateful',
-                    'artist' => 'NEFFEX',
-                    'year' => '2020',
+                    'artist' => 'Mahalia',
+                    'year' => '2019',
                     'tempo' => '128 BPM',
-                    'spotify' => 'https://open.spotify.com/track/4Jxs7D0gAq0b3LvRIJ7bVf',
+                    'spotify' => 'https://open.spotify.com/track/7mvma3mO5hSyhVbJDXxtFz?si=709c84f7edc34883',
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
-                    'title' => 'Dear God',
-                    'artist' => 'Dax',
-                    'year' => '2021',
+                    'title' => 'Thankful',
+                    'artist' => 'Kelly Clarkson',
+                    'year' => '2003',
                     'tempo' => '85 BPM',
-                    'spotify' => 'https://open.spotify.com/track/3m3x3dHllt6W3D9KjEeSpJ',
+                    'spotify' => 'https://open.spotify.com/track/51Fy2Y20yZjaL3ffarnW2M?si=ef2810b8cfa44f5b',
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
-                    'title' => 'Thank God I Do',
-                    'artist' => 'Lauren Daigle',
-                    'year' => '2023',
+                    'title' => 'Thank U',
+                    'artist' => 'Alanis Morissette',
+                    'year' => '1998',
                     'tempo' => '85 BPM',
-                    'spotify' => 'https://open.spotify.com/track/60boA3e7vPUCf2NqaWjq0i',
+                    'spotify' => 'https://open.spotify.com/track/3CVDronuSnhguSUguPoseM?si=e80a59d56dfe4c5b',
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
-                    'title' => 'Rise Up',
-                    'artist' => 'Andra Day',
-                    'year' => '2015',
+                    'title' => 'Blessings ',
+                    'artist' => 'Chance the Rapper',
+                    'year' => '2016',
                     'tempo' => '72 BPM',
-                    'spotify' => 'https://open.spotify.com/track/0tV8pOpiNsKqUys0ilUcXz',
+                    'spotify' => 'https://open.spotify.com/track/5IdQEHgtmj9th3OkfQKhf8?si=b1dc4e35be424819',
                     'image' => 'image/flevitating.jpg'
                 ],
                 [
@@ -475,53 +475,6 @@ function getAllSongs() {
                 ]
             ]
         ],
-        'hopeful' => [
-            'mood' => 'Optimistic',
-            'energy' => 'Medium',
-            'description' => 'Inspiring tracks that fill you with hope and positivity.',
-            'songs' => [
-                [
-                    'title' => 'High Hopes',
-                    'artist' => 'Panic! At The Disco',
-                    'year' => '2018',
-                    'tempo' => '82 BPM',
-                    'spotify' => 'https://open.spotify.com/track/1rqqCSm0Qe4I9rUvWnCAom',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
-                    'title' => 'Better Days',
-                    'artist' => 'NEIKED ft. Mae Muller & Polo G',
-                    'year' => '2021',
-                    'tempo' => '90 BPM',
-                    'spotify' => 'https://open.spotify.com/track/5bDx1QhXp9a5V6uCFCdqJ0',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
-                    'title' => 'I\'m Good (Blue)',
-                    'artist' => 'David Guetta & Bebe Rexha',
-                    'year' => '2022',
-                    'tempo' => '128 BPM',
-                    'spotify' => 'https://open.spotify.com/track/4cD58psRXl8K3Ug0vRSjYh',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
-                    'title' => 'Let Me Down Slowly',
-                    'artist' => 'Alec Benjamin',
-                    'year' => '2018',
-                    'tempo' => '80 BPM',
-                    'spotify' => 'https://open.spotify.com/track/2qxmye6gkb9YcD7cLg3QjR',
-                    'image' => 'image/flevitating.jpg'
-                ],
-                [
-                    'title' => 'Break My Heart',
-                    'artist' => 'Dua Lipa',
-                    'year' => '2020',
-                    'tempo' => '110 BPM',
-                    'spotify' => 'https://open.spotify.com/track/017PF4Q3l4DBUiWoXk4OWT',
-                    'image' => 'image/flevitating.jpg'
-                ]
-            ]
-        ]
     ];
 }
 ?>

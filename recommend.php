@@ -97,7 +97,7 @@ $songs = $recommendationData['songs'];
                         </a>
                         <button onclick="addToPlaylist('<?php echo htmlspecialchars($song['title']); ?>', '<?php echo htmlspecialchars($song['artist']); ?>', '<?php echo $song['spotify']; ?>')" 
                                 class="btn btn-small btn-playlist">
-                            ➕ Add
+                            Add to Playlist
                         </button>
                     </div>
                 </div>
