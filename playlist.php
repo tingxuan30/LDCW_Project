@@ -1,5 +1,6 @@
 <?php
 session_start();
+$current_page = 'playlist';
 
 // Initialize playlist if it doesn't exist
 if (!isset($_SESSION['playlist'])) {
@@ -40,9 +41,11 @@ $playlist = $_SESSION['playlist'];
             <div class="header-divider"></div>
 
             <nav class="main-nav">
-                <a href="index.php" class="nav-link active">Home</a>
-                <a href="search.php" class="nav-link">Search</a>
-                <a href="playlist.php" class="nav-link">Playlist <?php echo isset($_SESSION['playlist']) ? '(' . count($_SESSION['playlist']) . ')' : ''; ?></a>
+                <a href="index.php" class="nav-link <?php echo ($current_page == 'home') ? 'active' : ''; ?>">Home</a>
+                <a href="search.php" class="nav-link <?php echo ($current_page == 'search') ? 'active' : ''; ?>">Search</a>
+                <a href="playlist.php" class="nav-link <?php echo ($current_page == 'playlist') ? 'active' : ''; ?>">
+                    Playlist <?php echo isset($_SESSION['playlist']) ? '(' . count($_SESSION['playlist']) . ')' : ''; ?>
+                </a>
             </nav>
         </header>
 

@@ -1,5 +1,6 @@
 <?php
 session_start();
+$current_page = 'home';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,10 +22,13 @@ session_start();
             <p class="header-subtitle">Intelligent Song Recommendation Engine</p>
             <div class="header-divider"></div>
 
+            <!-- Navigation -->
             <nav class="main-nav">
-                <a href="index.php" class="nav-link active">Home</a>
-                <a href="search.php" class="nav-link">Search</a>
-                <a href="playlist.php" class="nav-link">Playlist <?php echo isset($_SESSION['playlist']) ? '(' . count($_SESSION['playlist']) . ')' : ''; ?></a>
+                <a href="index.php" class="nav-link <?php echo ($current_page == 'home') ? 'active' : ''; ?>">Home</a>
+                <a href="search.php" class="nav-link <?php echo ($current_page == 'search') ? 'active' : ''; ?>">Search</a>
+                <a href="playlist.php" class="nav-link <?php echo ($current_page == 'playlist') ? 'active' : ''; ?>">
+                    Playlist <?php echo isset($_SESSION['playlist']) ? '(' . count($_SESSION['playlist']) . ')' : ''; ?>
+                </a>
             </nav>
         </header>
 

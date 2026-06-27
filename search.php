@@ -1,5 +1,6 @@
 <?php
 session_start();
+$current_page = 'search'; 
 
 // Initialize search results
 $searchResults = [];
@@ -61,10 +62,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['q']) && !empty($_GET['q'
             
             <div class="header-divider"></div>
 
-                        <nav class="main-nav">
-                <a href="index.php" class="nav-link active">Home</a>
-                <a href="search.php" class="nav-link">Search</a>
-                <a href="playlist.php" class="nav-link">Playlist <?php echo isset($_SESSION['playlist']) ? '(' . count($_SESSION['playlist']) . ')' : ''; ?></a>
+            <nav class="main-nav">
+                <a href="index.php" class="nav-link <?php echo ($current_page == 'home') ? 'active' : ''; ?>">Home</a>
+                <a href="search.php" class="nav-link <?php echo ($current_page == 'search') ? 'active' : ''; ?>">Search</a>
+                <a href="playlist.php" class="nav-link <?php echo ($current_page == 'playlist') ? 'active' : ''; ?>">
+                    Playlist <?php echo isset($_SESSION['playlist']) ? '(' . count($_SESSION['playlist']) . ')' : ''; ?>
+                </a>
             </nav>
         </header>
 
@@ -130,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['q']) && !empty($_GET['q'
                             ▶ Play
                         </a>
                         <button onclick="addToPlaylist('<?php echo htmlspecialchars($song['title']); ?>', '<?php echo htmlspecialchars($song['artist']); ?>', '<?php echo $song['spotify']; ?>')" class="btn btn-small btn-playlist">
-                            ➕ Add
+                            Add to Playlist
                         </button>
                     </div>
                 </div>
