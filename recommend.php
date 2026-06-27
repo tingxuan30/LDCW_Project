@@ -65,11 +65,23 @@ $songs = $recommendationData['songs'];
                 <p class="mood-description"><?php echo htmlspecialchars($description); ?></p>
             </div>
 
-            <!-- Song List with Add to Playlist -->
+            <!-- Song List with Images and Add to Playlist -->
             <div class="song-list">
                 <?php foreach ($songs as $index => $song): ?>
                 <div class="song-item">
                     <div class="song-number"><?php echo $index + 1; ?></div>
+                    <!-- SONG IMAGE - ADDED THIS SECTION -->
+                    <div class="song-image-container">
+                        <?php 
+                        // Check if image exists, otherwise use a default
+                        $imagePath = isset($song['image']) ? $song['image'] : 'image/default-album.jpg';
+                        // You might want to add a check if the file exists
+                        ?>
+                        <img src="<?php echo htmlspecialchars($imagePath); ?>" 
+                             alt="<?php echo htmlspecialchars($song['title']); ?> album art" 
+                             class="song-album-image"
+                             onerror="this.src='image/default-album.jpg'">
+                    </div>
                     <div class="song-info">
                         <h3 class="song-title-small"><?php echo htmlspecialchars($song['title']); ?></h3>
                         <p class="song-artist-small"><?php echo htmlspecialchars($song['artist']); ?></p>
