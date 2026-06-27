@@ -185,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['q']) && !empty($_GET['q'
                             alert('⚠️ ' + response.message);
                         }
                     } catch(e) {
-                        alert('✅ "' + title + '" added to your playlist!');
+                        console.error('Error parsing response:', e);
                     }
                 }
             };

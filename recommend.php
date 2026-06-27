@@ -142,7 +142,7 @@ $songs = $recommendationData['songs'];
                         alert('⚠️ ' + response.message);
                     }
                 } catch(e) {
-                    alert('✅ "' + title + '" added to your playlist!');
+                    aconsole.error('Error parsing response:', e);
                 }
             }
         };
