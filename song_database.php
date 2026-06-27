@@ -24,7 +24,7 @@ function getAllSongs() {
                     'year' => '2024',
                     'tempo' => '105 BPM',
                     'spotify' => 'https://open.spotify.com/track/2qSkIjg1o9h3YT9RAgYN75',
-                    'image' => 'image/X.jpg'
+                    'image' => 'image/espresso.png'
                 ],
                 [
                     'title' => 'Watermelon Sugar',
@@ -63,7 +63,7 @@ function getAllSongs() {
                     'year' => '2023',
                     'tempo' => '84 BPM',
                     'spotify' => 'https://open.spotify.com/track/17phhZDn6oGtzMe56NuWvj',
-                    'image' => 'image/X.jpg'
+                    'image' => 'image/lose-control.png'
                 ],
                 [
                     'title' => 'Die For You',
@@ -71,7 +71,7 @@ function getAllSongs() {
                     'year' => '2022',
                     'tempo' => '134 BPM',
                     'spotify' => 'https://open.spotify.com/track/2LBqCSwhJGcFQeTHMVGwy3',
-                    'image' => 'image/X.jpg'
+                    'image' => 'image/die-for-you.png'
                 ],
                 [
                     'title' => 'Someone You Loved',
@@ -110,7 +110,7 @@ function getAllSongs() {
                     'year' => '2020',
                     'tempo' => '171 BPM',
                     'spotify' => 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/blinding-light.png'
                 ],
                 [
                     'title' => 'STAY',
@@ -118,7 +118,7 @@ function getAllSongs() {
                     'year' => '2021',
                     'tempo' => '170 BPM',
                     'spotify' => 'https://open.spotify.com/track/5HCyWlXZPP0y6Gqq8TgA20',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/stay.png'
                 ],
                 [
                     'title' => 'Bad Guy',
@@ -126,7 +126,7 @@ function getAllSongs() {
                     'year' => '2019',
                     'tempo' => '135 BPM',
                     'spotify' => 'https://open.spotify.com/track/2Fxmhks0bxGSBdJ92vM42m',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/bad-guy.png'
                 ],
                 [
                     'title' => 'Rich Flex',
@@ -134,7 +134,7 @@ function getAllSongs() {
                     'year' => '2022',
                     'tempo' => '135 BPM',
                     'spotify' => 'https://open.spotify.com/track/1bDbXMyjaUIooNwFE9wn0N',
-                    'image' => 'image/X.jpg'
+                    'image' => 'image/rich-flex.png'
                 ],
                 [
                     'title' => 'Uptown Funk',
@@ -142,7 +142,7 @@ function getAllSongs() {
                     'year' => '2014',
                     'tempo' => '115 BPM',
                     'spotify' => 'https://open.spotify.com/track/32OlwWuMpZ6b0aN2RZOeMS',
-                    'image' => 'image/X.jpg'
+                    'image' => 'image/updown-funk.png'
                 ],
             ]
         ],
@@ -157,7 +157,7 @@ function getAllSongs() {
                             'year' => '2016',
                             'tempo' => '80 BPM',
                             'spotify' => 'https://open.spotify.com/track/7hDVYcQq6MxkdJGweuCtl9',
-                            'image' => 'image/flevitating.jpg'
+                            'image' => 'image/ocean-eyes.png'
                         ],
                         [
                             'title' => 'Tip Top',
@@ -165,7 +165,7 @@ function getAllSongs() {
                             'year' => '2023',
                             'tempo' => '122 BPM',
                             'spotify' => 'https://open.spotify.com/track/0MJ5wKsPEeihONNfugHGy7?si=92470cb7183444df',
-                            'image' => 'image/flevitating.jpg'
+                            'image' => 'image/tip-top.png'
                         ],
                         [
                             'title' => 'Better Together',
@@ -173,7 +173,7 @@ function getAllSongs() {
                             'year' => '2005',
                             'tempo' => '72 BPM',
                             'spotify' => 'https://open.spotify.com/track/2iXdwVdzA0KrI2Q0iZNJbX',
-                            'image' => 'image/flevitating.jpg'
+                            'image' => 'image/better-together.png'
                         ],
                         [
                             'title' => 'Soft Spot',
@@ -181,7 +181,7 @@ function getAllSongs() {
                             'year' => '2024',
                             'tempo' => '60 BPM',
                             'spotify' => 'https://open.spotify.com/track/2aL4lMGhWdPpyPL6COPou7?si=0729247b5f6045e1',
-                            'image' => 'image/flevitating.jpg'
+                            'image' => 'image/soft-spot.png'
                         ],
                         [
                             'title' => 'Paris in the Rain',
@@ -189,7 +189,7 @@ function getAllSongs() {
                             'year' => '2018',
                             'tempo' => '81 BPM',
                             'spotify' => 'https://open.spotify.com/track/2WdAV1VqmllcEznKlVOFxG?si=22584d2c14784fa7',
-                            'image' => 'image/flevitating.jpg'
+                            'image' => 'image/paris-in-the-rain.png'
                         ]
                     ]
         ],
@@ -204,7 +204,7 @@ function getAllSongs() {
                     'year' => '2019',
                     'tempo' => '96 BPM',
                     'spotify' => 'https://open.spotify.com/track/1dGr1c8CrMLDpV6mPbImSI',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/lover.png'
                 ],
                 [
                     'title' => 'Love Story',
@@ -212,7 +212,7 @@ function getAllSongs() {
                     'year' => '2008',
                     'tempo' => '107 BPM',
                     'spotify' => 'https://open.spotify.com/track/1D4PL9B8gOg78jiHg3FvBb?si=2e530758f8674887',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/love-story.png'
                 ],
                 [
                     'title' => 'Golden',
@@ -220,7 +220,7 @@ function getAllSongs() {
                     'year' => '2020',
                     'tempo' => '95 BPM',
                     'spotify' => 'https://open.spotify.com/track/45S5WTQEGOB1VHr1Q4FuPl',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/golden.png'
                 ],
                 [
                     'title' => 'Enchanted',
@@ -228,7 +228,7 @@ function getAllSongs() {
                     'year' => '2023',
                     'tempo' => '144 BPM',
                     'spotify' => 'https://open.spotify.com/track/10eBRyImhfqVvkiVEGf0N0',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/enchanted.png'
                 ],
                 [
                     'title' => 'Happier Than Ever',
@@ -236,7 +236,7 @@ function getAllSongs() {
                     'year' => '2021',
                     'tempo' => '120 BPM',
                     'spotify' => 'https://open.spotify.com/track/4RVwu0g32PAqgUiJoXsdF8',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/heppier-than-ever.png'
                 ]
             ]
         ],
@@ -251,7 +251,7 @@ function getAllSongs() {
                     'year' => '2017',
                     'tempo' => '126 BPM',
                     'spotify' => 'https://open.spotify.com/track/0pqnGHJpmpxLKifKRmU6WP',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/believer.png'
                 ],
                 [
                     'title' => 'Whatever It Takes',
@@ -259,7 +259,7 @@ function getAllSongs() {
                     'year' => '2017',
                     'tempo' => '135 BPM',
                     'spotify' => 'https://open.spotify.com/track/6Qn5zhYkTa37e91HC1D7lb',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/whatever-it-takes.png'
                 ],
                 [
                     'title' => 'Unstoppable',
@@ -267,7 +267,7 @@ function getAllSongs() {
                     'year' => '2016',
                     'tempo' => '133 BPM',
                     'spotify' => 'https://open.spotify.com/track/1yvMUkIOTeUNtNWlWRgANS',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/unstoppable.png'
                 ],
                 [
                     'title' => 'Rise Up',
@@ -275,7 +275,7 @@ function getAllSongs() {
                     'year' => '2015',
                     'tempo' => '72 BPM',
                     'spotify' => 'https://open.spotify.com/track/0tV8pOpiNsKqUys0ilUcXz',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/rise-up.png'
                 ],
                 [
                     'title' => 'Whatever It Takes',
@@ -283,7 +283,7 @@ function getAllSongs() {
                     'year' => '2017',
                     'tempo' => '135 BPM',
                     'spotify' => 'https://open.spotify.com/track/6Qn5zhYkTa37e91HC1D7lb',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/whatever-it-takes.png'
                 ]
             ]
         ],
@@ -298,7 +298,7 @@ function getAllSongs() {
                     'year' => '2022',
                     'tempo' => '87 BPM',
                     'spotify' => 'https://open.spotify.com/track/4Dvkj6JhhA12EX05fT7y2e',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/as-it-was.png'
                 ],
                 [
                     'title' => 'Shallow',
@@ -306,7 +306,7 @@ function getAllSongs() {
                     'year' => '2018',
                     'tempo' => '96 BPM',
                     'spotify' => 'https://open.spotify.com/track/2VxeLyX666F8uXCJ0dZF8B',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/shallow.png'
                 ],
                 [
                     'title' => 'The Night We Met',
@@ -314,7 +314,7 @@ function getAllSongs() {
                     'year' => '2015',
                     'tempo' => '145 BPM',
                     'spotify' => 'https://open.spotify.com/track/0QZ5yyl6B6utIWkxeBDxQN',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/the-night-we-met.png'
                 ],
                 [
                     'title' => 'Sweather Weather',
@@ -322,7 +322,7 @@ function getAllSongs() {
                     'year' => '2013',
                     'tempo' => '124 BPM',
                     'spotify' => 'https://open.spotify.com/track/2QjOHCTQ1Jl3zawyYOpxh6',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/sweather-weather.png'
                 ],
                 [
                     'title' => 'Blinding Lights',
@@ -330,7 +330,7 @@ function getAllSongs() {
                     'year' => '2019',
                     'tempo' => '171 BPM',
                     'spotify' => 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/blinding-light.png'
                 ]
             ]
         ],
@@ -345,7 +345,7 @@ function getAllSongs() {
                     'year' => '2022',
                     'tempo' => '90 BPM',
                     'spotify' => 'https://open.spotify.com/track/7KokYm8cMIXCsGVmUvKtqf',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/karma.png'
                 ],
                 [
                     'title' => 'Not Like Us',
@@ -353,7 +353,7 @@ function getAllSongs() {
                     'year' => '2024',
                     'tempo' => '100 BPM',
                     'spotify' => 'https://open.spotify.com/track/6AI3ezQ4o3HUoP6Dhudph3',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/not-like-us.png'
                 ],
                 [
                     'title' => 'One Step Closer',
@@ -361,7 +361,7 @@ function getAllSongs() {
                     'year' => '2000',
                     'tempo' => '95 BPM',
                     'spotify' => 'https://open.spotify.com/track/3K4HG9evC7dg3N0R9cYqk4',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/one-step-closer.png'
                 ],
                 [
                     'title' => 'Killing In The Name',
@@ -369,7 +369,7 @@ function getAllSongs() {
                     'year' => '1992',
                     'tempo' => '110 BPM',
                     'spotify' => 'https://open.spotify.com/track/59WN2psjkt1tyaxjspN8fp',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/killing-in-the-name.png'
                 ],
                 [
                     'title' => 'Lose Yourself',
@@ -377,7 +377,7 @@ function getAllSongs() {
                     'year' => '2002',
                     'tempo' => '86 BPM',
                     'spotify' => 'https://open.spotify.com/track/5Z01UMMf7V1o0MzF86s6WJ',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/lose-yourself.png'
                 ]
             ]
         ],
@@ -392,7 +392,7 @@ function getAllSongs() {
                     'year' => '2025',
                     'tempo' => '140 BPM',
                     'spotify' => 'https://open.spotify.com/track/1musbempyJAw5gfSKZHXP9?si=136651ca60fc49b9',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/anxiety.png'
                 ],
                 [
                     'title' => 'Lose You To Love Me',
@@ -400,7 +400,7 @@ function getAllSongs() {
                     'year' => '2019',
                     'tempo' => '80 BPM',
                     'spotify' => 'https://open.spotify.com/track/4l0Mvzj72xxOpRrp6h8nHi',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/lose-you-to-love-me.png'
                 ],
                 [
                     'title' => 'Hold On',
@@ -408,7 +408,7 @@ function getAllSongs() {
                     'year' => '2021',
                     'tempo' => '82 BPM',
                     'spotify' => 'https://open.spotify.com/track/6bGMSP3H9YqkmaLnaJTIoF?si=ec04c8eb6dad431f',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/hold-on.png'
                 ],
                 [
                     'title' => 'Everybody Wants To Rule The World',
@@ -416,7 +416,7 @@ function getAllSongs() {
                     'year' => '2013',
                     'tempo' => '82 BPM',
                     'spotify' => 'https://open.spotify.com/track/3S1tTwSKIZgf4QGltFyCxM?si=343813b51eab4427',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/everybody-wants-to-rule-the-world.png'
                 ],
                 [
                     'title' => 'No Time To Die',
@@ -424,7 +424,7 @@ function getAllSongs() {
                     'year' => '2020',
                     'tempo' => '120 BPM',
                     'spotify' => 'https://open.spotify.com/track/73SpzrcaHk0RQPFP73vqVR',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/no-time-to-die.png'
                 ]
             ]
         ],
@@ -439,7 +439,7 @@ function getAllSongs() {
                     'year' => '2019',
                     'tempo' => '128 BPM',
                     'spotify' => 'https://open.spotify.com/track/7mvma3mO5hSyhVbJDXxtFz?si=709c84f7edc34883',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/grateful.png'
                 ],
                 [
                     'title' => 'Thankful',
@@ -447,7 +447,7 @@ function getAllSongs() {
                     'year' => '2003',
                     'tempo' => '85 BPM',
                     'spotify' => 'https://open.spotify.com/track/51Fy2Y20yZjaL3ffarnW2M?si=ef2810b8cfa44f5b',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/thankful.png'
                 ],
                 [
                     'title' => 'Thank U',
@@ -455,7 +455,7 @@ function getAllSongs() {
                     'year' => '1998',
                     'tempo' => '85 BPM',
                     'spotify' => 'https://open.spotify.com/track/3CVDronuSnhguSUguPoseM?si=e80a59d56dfe4c5b',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/thank-u.png'
                 ],
                 [
                     'title' => 'Blessings ',
@@ -463,7 +463,7 @@ function getAllSongs() {
                     'year' => '2016',
                     'tempo' => '72 BPM',
                     'spotify' => 'https://open.spotify.com/track/5IdQEHgtmj9th3OkfQKhf8?si=b1dc4e35be424819',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/blessings.png'
                 ],
                 [
                     'title' => 'Fight Song',
@@ -471,7 +471,7 @@ function getAllSongs() {
                     'year' => '2015',
                     'tempo' => '135 BPM',
                     'spotify' => 'https://open.spotify.com/track/37f4ITSlgPX81ad2EvmVQr',
-                    'image' => 'image/flevitating.jpg'
+                    'image' => 'image/fight-song.png'
                 ]
             ]
         ],
