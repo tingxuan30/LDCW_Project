@@ -48,7 +48,7 @@ function getAllSongs() {
                     'year' => '2020',
                     'tempo' => '103 BPM',
                     'spotify' => 'https://open.spotify.com/track/39LLxExYz6ewLAcYrzQQyP',
-                    'image' => 'image/flevitating.png'
+                    'image' => 'image/levitating.png'
                 ]
             ]
         ],
@@ -142,8 +142,8 @@ function getAllSongs() {
                     'year' => '2014',
                     'tempo' => '115 BPM',
                     'spotify' => 'https://open.spotify.com/track/32OlwWuMpZ6b0aN2RZOeMS',
-                    'image' => 'image/updown-funk.png'
-                ],
+                    'image' => 'image/uptown-funk.png'
+                ]
             ]
         ],
         'chill' => [
@@ -151,47 +151,47 @@ function getAllSongs() {
             'energy' => 'Very Low',
             'description' => 'Calming tracks for relaxation and peaceful moments.',
             'songs' => [
-                        [
-                            'title' => 'Ocean Eyes',
-                            'artist' => 'Billie Eilish',
-                            'year' => '2016',
-                            'tempo' => '80 BPM',
-                            'spotify' => 'https://open.spotify.com/track/7hDVYcQq6MxkdJGweuCtl9',
-                            'image' => 'image/ocean-eyes.png'
-                        ],
-                        [
-                            'title' => 'Tip Top',
-                            'artist' => 'HYBS',
-                            'year' => '2023',
-                            'tempo' => '122 BPM',
-                            'spotify' => 'https://open.spotify.com/track/0MJ5wKsPEeihONNfugHGy7?si=92470cb7183444df',
-                            'image' => 'image/tip-top.png'
-                        ],
-                        [
-                            'title' => 'Better Together',
-                            'artist' => 'Jack Johnson',
-                            'year' => '2005',
-                            'tempo' => '72 BPM',
-                            'spotify' => 'https://open.spotify.com/track/2iXdwVdzA0KrI2Q0iZNJbX',
-                            'image' => 'image/better-together.png'
-                        ],
-                        [
-                            'title' => 'Soft Spot',
-                            'artist' => 'Keshi',
-                            'year' => '2024',
-                            'tempo' => '60 BPM',
-                            'spotify' => 'https://open.spotify.com/track/2aL4lMGhWdPpyPL6COPou7?si=0729247b5f6045e1',
-                            'image' => 'image/soft-spot.png'
-                        ],
-                        [
-                            'title' => 'Paris in the Rain',
-                            'artist' => 'LAUV',
-                            'year' => '2018',
-                            'tempo' => '81 BPM',
-                            'spotify' => 'https://open.spotify.com/track/2WdAV1VqmllcEznKlVOFxG?si=22584d2c14784fa7',
-                            'image' => 'image/paris-in-the-rain.png'
-                        ]
-                    ]
+                [
+                    'title' => 'Ocean Eyes',
+                    'artist' => 'Billie Eilish',
+                    'year' => '2016',
+                    'tempo' => '80 BPM',
+                    'spotify' => 'https://open.spotify.com/track/7hDVYcQq6MxkdJGweuCtl9',
+                    'image' => 'image/ocean-eyes.png'
+                ],
+                [
+                    'title' => 'Tip Top',
+                    'artist' => 'HYBS',
+                    'year' => '2023',
+                    'tempo' => '122 BPM',
+                    'spotify' => 'https://open.spotify.com/track/0MJ5wKsPEeihONNfugHGy7?si=92470cb7183444df',
+                    'image' => 'image/tip-top.png'
+                ],
+                [
+                    'title' => 'Better Together',
+                    'artist' => 'Jack Johnson',
+                    'year' => '2005',
+                    'tempo' => '72 BPM',
+                    'spotify' => 'https://open.spotify.com/track/2iXdwVdzA0KrI2Q0iZNJbX',
+                    'image' => 'image/better-together.png'
+                ],
+                [
+                    'title' => 'Soft Spot',
+                    'artist' => 'Keshi',
+                    'year' => '2024',
+                    'tempo' => '60 BPM',
+                    'spotify' => 'https://open.spotify.com/track/2aL4lMGhWdPpyPL6COPou7?si=0729247b5f6045e1',
+                    'image' => 'image/soft-spot.png'
+                ],
+                [
+                    'title' => 'Paris in the Rain',
+                    'artist' => 'LAUV',
+                    'year' => '2018',
+                    'tempo' => '81 BPM',
+                    'spotify' => 'https://open.spotify.com/track/2WdAV1VqmllcEznKlVOFxG?si=22584d2c14784fa7',
+                    'image' => 'image/paris-in-the-rain.png'
+                ]
+            ]
         ],
         'romantic' => [
             'mood' => 'Romantic',
@@ -236,7 +236,7 @@ function getAllSongs() {
                     'year' => '2021',
                     'tempo' => '120 BPM',
                     'spotify' => 'https://open.spotify.com/track/4RVwu0g32PAqgUiJoXsdF8',
-                    'image' => 'image/heppier-than-ever.png'
+                    'image' => 'image/happier-than-ever.png'
                 ]
             ]
         ],
@@ -278,12 +278,12 @@ function getAllSongs() {
                     'image' => 'image/rise-up.png'
                 ],
                 [
-                    'title' => 'Whatever It Takes',
-                    'artist' => 'Imagine Dragons',
-                    'year' => '2017',
+                    'title' => 'Fight Song',
+                    'artist' => 'Rachel Platten',
+                    'year' => '2015',
                     'tempo' => '135 BPM',
-                    'spotify' => 'https://open.spotify.com/track/6Qn5zhYkTa37e91HC1D7lb',
-                    'image' => 'image/whatever-it-takes.png'
+                    'spotify' => 'https://open.spotify.com/track/37f4ITSlgPX81ad2EvmVQr',
+                    'image' => 'image/fight-song.png'
                 ]
             ]
         ],
@@ -317,20 +317,20 @@ function getAllSongs() {
                     'image' => 'image/the-night-we-met.png'
                 ],
                 [
-                    'title' => 'Sweather Weather',
+                    'title' => 'Sweater Weather',
                     'artist' => 'The Neighbourhood',
                     'year' => '2013',
                     'tempo' => '124 BPM',
                     'spotify' => 'https://open.spotify.com/track/2QjOHCTQ1Jl3zawyYOpxh6',
-                    'image' => 'image/sweather-weather.png'
+                    'image' => 'image/sweater-weather.png'
                 ],
                 [
-                    'title' => 'Blinding Lights',
-                    'artist' => 'The Weeknd',
-                    'year' => '2019',
-                    'tempo' => '171 BPM',
-                    'spotify' => 'https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b',
-                    'image' => 'image/blinding-light.png'
+                    'title' => 'Counting Star',
+                    'artist' => 'OneRepublic',
+                    'year' => '2013',
+                    'tempo' => '124 BPM',
+                    'spotify' => 'https://open.spotify.com/track/2tpWsVSb9UEmDRxAl1zhX1',
+                    'image' => 'image/counting-star.png'
                 ]
             ]
         ],
@@ -458,7 +458,7 @@ function getAllSongs() {
                     'image' => 'image/thank-u.png'
                 ],
                 [
-                    'title' => 'Blessings ',
+                    'title' => 'Blessings',
                     'artist' => 'Chance the Rapper',
                     'year' => '2016',
                     'tempo' => '72 BPM',
@@ -466,12 +466,12 @@ function getAllSongs() {
                     'image' => 'image/blessings.png'
                 ],
                 [
-                    'title' => 'Fight Song',
-                    'artist' => 'Rachel Platten',
-                    'year' => '2015',
-                    'tempo' => '135 BPM',
-                    'spotify' => 'https://open.spotify.com/track/37f4ITSlgPX81ad2EvmVQr',
-                    'image' => 'image/fight-song.png'
+                    'title' => 'Thank You For Everthing',
+                    'artist' => 'Diego Gonzalez',
+                    'year' => '2023',
+                    'tempo' => '85 BPM',
+                    'spotify' => 'https://open.spotify.com/track/5hVdovNC8QAuuJqUnT400l',
+                    'image' => 'image/thank-you-for-everything.png'
                 ]
             ]
         ],
