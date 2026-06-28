@@ -54,24 +54,25 @@ $playlist = $_SESSION['playlist'];
         <?php if (count($playlist) > 0): ?>
         
         <!-- Search Section -->
-        <div class="search-section" style="width: 100%; margin: 20px 0;">
-            <div class="search-wrapper" style="width: 100%; max-width: 100%;">
+        <div class="search-section search-spacing" style="width: 100%;">
+            <div class="search-wrapper search-wrapper-full">
                 <input type="text" 
-                       id="searchInput" 
-                       class="search-input" 
-                       placeholder="Search songs in your playlist..." 
-                       style="width: 100%;">
-                <button onclick="filterPlaylist()" class="btn-search" style="white-space: nowrap;">
-                    <span class="search-icon">🔍</span> Search
-                </button>
+                    id="searchInput" 
+                    class="search-input search-input-full" 
+                    placeholder="🔍 Search songs in your playlist..." 
+                    onkeyup="filterPlaylist()">
             </div>
         </div>
 
         <!-- Playlist Actions -->
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 25px;">
-            <a href="index.php" class="btn btn-secondary">← Add More Songs</a>
-            <button onclick="shufflePlaylist()" class="btn btn-warning">🔀 Shuffle</button>
-            <button onclick="clearPlaylist()" class="btn btn-danger">🗑️ Clear Playlist</button>
+        <div class="playlist-actions-wrapper">
+            <div class="playlist-actions-left">
+                <a href="index.php" class="btn btn-secondary">← Add More Songs</a>
+            </div>
+            <div class="playlist-actions-right">
+                <button onclick="shufflePlaylist()" class="btn btn-warning">🔀 Shuffle</button>
+                <button onclick="clearPlaylist()" class="btn btn-danger">🗑️ Clear Playlist</button>
+            </div>
         </div>
 
         <!-- Song List -->
@@ -119,15 +120,24 @@ $playlist = $_SESSION['playlist'];
             <?php endforeach; ?>
         </div>
 
+        <!-- No Search Results Message -->
+        <div id="noResults" class="no-results" style="display: none;">
+            <div class="icon">🔍</div>
+            <h4>No songs found</h4>
+            <p>Try searching with different keywords</p>
+        </div>
+
         <?php else: ?>
         <!-- Empty Playlist -->
         <div class="empty-playlist" style="text-align: center; padding: 60px 20px;">
-            <div class="empty-icon" style="font-size: 4rem; margin-bottom: 20px;">🎵</div>
+            <div style="font-size: 5rem; margin-bottom: 20px;">🎶</div>
             <h3 style="color: #fff; margin-bottom: 10px;">Your playlist is empty</h3>
-            <p style="color: #888; margin-bottom: 30px;">Start building your playlist by searching for songs or getting recommendations based on your mood.</p>
-            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="index.php" class="btn btn-primary">Get Recommendations</a>
-                <a href="search.php" class="btn btn-secondary">Search Songs</a>
+            <p style="color: #888; margin-bottom: 10px; max-width: 400px; margin-left: auto; margin-right: auto;">
+                Start building your playlist by searching for songs or getting recommendations.
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+                <a href="index.php" class="btn btn-primary">🎵 Get Recommendations</a>
+                <a href="search.php" class="btn btn-secondary">🔍 Search Songs</a>
             </div>
         </div>
         <?php endif; ?>
@@ -140,7 +150,7 @@ $playlist = $_SESSION['playlist'];
     </div>
 
     <script>
-        // ============= TOAST =============
+        //Show message
         function showToast(message, type = 'info') {
             let toast = document.getElementById('toast');
             if (!toast) {
@@ -180,11 +190,12 @@ $playlist = $_SESSION['playlist'];
             }, 4000);
         }
 
-        // ============= SEARCH =============
+        //Search Function with No Results
         function filterPlaylist() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
             const items = document.querySelectorAll('.search-item');
+            let visibleCount = 0;
             
             items.forEach(item => {
                 const title = item.getAttribute('data-title') || '';
@@ -192,19 +203,31 @@ $playlist = $_SESSION['playlist'];
                 
                 if (title.includes(filter) || artist.includes(filter)) {
                     item.style.display = 'flex';
+                    visibleCount++;
                 } else {
                     item.style.display = 'none';
                 }
             });
+            
+            // Show/hide no results message
+            const noResults = document.getElementById('noResults');
+            if (noResults) {
+                if (items.length > 0 && visibleCount === 0 && filter.length > 0) {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
+            }
         }
 
+        // Enter key support
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 filterPlaylist();
             }
         });
 
-        // ============= REMOVE SONG =============
+        //Remove Song Function
         function removeSong(index) {
             if (confirm('Remove this song from your playlist?')) {
                 fetch('playlist_data.php', {
@@ -227,7 +250,7 @@ $playlist = $_SESSION['playlist'];
             }
         }
 
-        // ============= CLEAR PLAYLIST =============
+        //Clear All Song Function
         function clearPlaylist() {
             if (confirm('Are you sure you want to clear your entire playlist?')) {
                 fetch('playlist_data.php', {
@@ -250,7 +273,7 @@ $playlist = $_SESSION['playlist'];
             }
         }
 
-        // ============= SHUFFLE PLAYLIST =============
+        //Shuffle function
         function shufflePlaylist() {
             const songs = <?php echo json_encode($playlist); ?>;
             if (songs.length < 2) {

@@ -762,13 +762,43 @@ body {
     color: #6b7280;
 }
 
-.playlist-actions {
+.playlist-actions-wrapper {
     display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
 }
-
+.playlist-actions-left {
+    display: flex;
+    gap: 10px;
+}
+.playlist-actions-right {
+    display: flex;
+    gap: 10px;
+}
+.no-results 
+{
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+.no-results .icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+.no-results h4 {
+    color: #fff;
+    margin-bottom: 8px;
+}
+.no-results p {
+    color: #666;
+    font-size: 0.9rem;
+}
+.search-spacing {
+    margin-bottom: 20px;
+}
 .btn-danger {
     background: #ef4444;
     color: #ffffff;

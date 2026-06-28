@@ -38,6 +38,18 @@ $songs = $recommendationData['songs'];
     <title>Recommendations · Mood Melody</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .action-section {
+            display: flex;
+            justify-content: flex-start;
+            margin: 20px 0 30px 0;
+        }
+        .action-section .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
 </head>
 <body>
     <div class="container result-container">
@@ -51,6 +63,12 @@ $songs = $recommendationData['songs'];
             <div class="header-divider"></div>
         </header>
 
+        <div class="action-section">
+            <a href="index.php" class="btn btn-secondary">
+                <span class="btn-icon">←</span> Select Another Mood
+            </a>
+        </div>
+            
         <!-- Results Content -->
         <main class="main-content">
             <!-- Mood Overview -->
@@ -108,13 +126,6 @@ $songs = $recommendationData['songs'];
                 <?php endforeach; ?>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="action-section">
-                <a href="index.php" class="btn btn-secondary">
-                    <span class="btn-icon">←</span> Select Another Mood
-                </a>
-            </div>
-
             <!-- Footer -->
             <div class="footer-info">
                 <p class="footer-text">Discover more recommendations by exploring different moods.</p>
@@ -122,8 +133,6 @@ $songs = $recommendationData['songs'];
             </div>
         </main>
     </div>
-</body>
-</html>
 
 <script>
     function addToPlaylist(title, artist, spotify, image, year, tempo) {
@@ -154,3 +163,5 @@ $songs = $recommendationData['songs'];
                 '&tempo=' + encodeURIComponent(tempo || ''));
     }
 </script>
+</body>
+</html>
