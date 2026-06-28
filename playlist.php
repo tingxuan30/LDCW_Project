@@ -7,17 +7,6 @@ if (!isset($_SESSION['playlist'])) {
     $_SESSION['playlist'] = [];
 }
 
-// Handle remove from playlist
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] == 'remove') {
-    $index = intval($_POST['index']);
-    if (isset($_SESSION['playlist'][$index])) {
-        array_splice($_SESSION['playlist'], $index, 1);
-    }
-    // Redirect to prevent form resubmission
-    header("Location: playlist.php");
-    exit();
-}
-
 $playlist = $_SESSION['playlist'];
 ?>
 <!DOCTYPE html>
@@ -63,14 +52,32 @@ $playlist = $_SESSION['playlist'];
 
         <!-- Playlist Content -->
         <?php if (count($playlist) > 0): ?>
-        <div class="playlist-actions">
-            <button onclick="clearPlaylist()" class="btn btn-danger">🗑️ Clear Playlist</button>
-            <a href="index.php" class="btn btn-secondary">← Add More Songs</a>
+        
+        <!-- Search Section -->
+        <div class="search-section" style="width: 100%; margin: 20px 0;">
+            <div class="search-wrapper" style="width: 100%; max-width: 100%;">
+                <input type="text" 
+                       id="searchInput" 
+                       class="search-input" 
+                       placeholder="Search songs in your playlist..." 
+                       style="width: 100%;">
+                <button onclick="filterPlaylist()" class="btn-search" style="white-space: nowrap;">
+                    <span class="search-icon">🔍</span> Search
+                </button>
+            </div>
         </div>
 
-        <div class="song-list playlist-songs">
+        <!-- Playlist Actions -->
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 25px;">
+            <a href="index.php" class="btn btn-secondary">← Add More Songs</a>
+            <button onclick="shufflePlaylist()" class="btn btn-warning">🔀 Shuffle</button>
+            <button onclick="clearPlaylist()" class="btn btn-danger">🗑️ Clear Playlist</button>
+        </div>
+
+        <!-- Song List -->
+        <div class="search-results-list" id="playlistContainer">
             <?php foreach ($playlist as $index => $song): ?>
-            <div class="song-item playlist-item">
+            <div class="song-item search-item" data-index="<?php echo $index; ?>" data-title="<?php echo strtolower(htmlspecialchars($song['title'])); ?>" data-artist="<?php echo strtolower(htmlspecialchars($song['artist'])); ?>">
                 <div class="song-number"><?php echo $index + 1; ?></div>
             
                 <div class="song-image-container">
@@ -86,11 +93,15 @@ $playlist = $_SESSION['playlist'];
                 <div class="song-info">
                     <h3 class="song-title-small"><?php echo htmlspecialchars($song['title']); ?></h3>
                     <p class="song-artist-small"><?php echo htmlspecialchars($song['artist']); ?></p>
-                    <?php if (isset($song['year'])): ?>
+                    <?php if (isset($song['year']) || isset($song['tempo'])): ?>
                     <div class="song-meta-small">
+                        <?php if (isset($song['year'])): ?>
                         <span><?php echo $song['year']; ?></span>
+                        <?php endif; ?>
                         <?php if (isset($song['tempo'])): ?>
+                        <?php if (isset($song['year'])): ?>
                         <span class="dot">·</span>
+                        <?php endif; ?>
                         <span><?php echo $song['tempo']; ?></span>
                         <?php endif; ?>
                     </div>
@@ -100,33 +111,21 @@ $playlist = $_SESSION['playlist'];
                     <a href="<?php echo $song['spotify']; ?>" target="_blank" class="btn btn-small btn-spotify">
                         ▶ Play
                     </a>
-                    <form method="POST" action="playlist.php" style="display:inline;">
-                        <input type="hidden" name="action" value="remove">
-                        <input type="hidden" name="index" value="<?php echo $index; ?>">
-                        <button type="submit" class="btn btn-small btn-remove" onclick="return confirm('Remove this song from your playlist?')">
-                            ✕ Remove
-                        </button>
-                    </form>
+                    <button onclick="removeSong(<?php echo $index; ?>)" class="btn btn-small btn-remove">
+                        ✕ Remove
+                    </button>
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
 
-        <!-- Play All Button -->
-        <div class="play-all-section">
-            <a href="#" onclick="playAll()" class="btn btn-primary btn-play-all">
-                ▶ Play All Songs
-            </a>
-            <p class="play-all-note">Opens all songs in Spotify (opens in new tabs)</p>
-        </div>
-
         <?php else: ?>
         <!-- Empty Playlist -->
-        <div class="empty-playlist">
-            <div class="empty-icon">🎵</div>
-            <h3>Your playlist is empty</h3>
-            <p>Start building your playlist by searching for songs or getting recommendations based on your mood.</p>
-            <div class="empty-actions">
+        <div class="empty-playlist" style="text-align: center; padding: 60px 20px;">
+            <div class="empty-icon" style="font-size: 4rem; margin-bottom: 20px;">🎵</div>
+            <h3 style="color: #fff; margin-bottom: 10px;">Your playlist is empty</h3>
+            <p style="color: #888; margin-bottom: 30px;">Start building your playlist by searching for songs or getting recommendations based on your mood.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <a href="index.php" class="btn btn-primary">Get Recommendations</a>
                 <a href="search.php" class="btn btn-secondary">Search Songs</a>
             </div>
@@ -141,27 +140,146 @@ $playlist = $_SESSION['playlist'];
     </div>
 
     <script>
-        function clearPlaylist() {
-            if (confirm('Are you sure you want to clear your entire playlist?')) {
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', 'playlist_data.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onload = function() {
-                    if (this.status === 200) {
-                        location.reload();
+        // ============= TOAST =============
+        function showToast(message, type = 'info') {
+            let toast = document.getElementById('toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #333;
+                    color: #fff;
+                    padding: 16px 24px;
+                    border-radius: 8px;
+                    z-index: 1000;
+                    opacity: 0;
+                    transition: opacity 0.5s;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    font-size: 1rem;
+                    max-width: 90%;
+                `;
+                document.body.appendChild(toast);
+            }
+            
+            const colors = {
+                success: '#1DB954',
+                error: '#dc3545',
+                warning: '#f0ad4e',
+                info: '#17a2b8'
+            };
+            toast.style.background = colors[type] || '#333';
+            toast.textContent = message;
+            toast.style.opacity = '1';
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 4000);
+        }
+
+        // ============= SEARCH =============
+        function filterPlaylist() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const items = document.querySelectorAll('.search-item');
+            
+            items.forEach(item => {
+                const title = item.getAttribute('data-title') || '';
+                const artist = item.getAttribute('data-artist') || '';
+                
+                if (title.includes(filter) || artist.includes(filter)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                filterPlaylist();
+            }
+        });
+
+        // ============= REMOVE SONG =============
+        function removeSong(index) {
+            if (confirm('Remove this song from your playlist?')) {
+                fetch('playlist_data.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'action=remove&index=' + index
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast('✅ ' + data.message, 'success');
+                        setTimeout(() => location.reload(), 500);
+                    } else {
+                        showToast('❌ ' + data.message, 'error');
                     }
-                };
-                xhr.send('action=clear');
+                })
+                .catch(() => showToast('Network error', 'error'));
             }
         }
 
-        function playAll() {
-            const songs = <?php echo json_encode($playlist); ?>;
-            songs.forEach(song => {
-                window.open(song.spotify, '_blank');
-            });
-            alert('🎵 Opening all ' + songs.length + ' songs in Spotify!');
+        // ============= CLEAR PLAYLIST =============
+        function clearPlaylist() {
+            if (confirm('Are you sure you want to clear your entire playlist?')) {
+                fetch('playlist_data.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'action=clear'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast('✅ ' + data.message, 'success');
+                        setTimeout(() => location.reload(), 500);
+                    } else {
+                        showToast('❌ ' + data.message, 'error');
+                    }
+                })
+                .catch(() => showToast('Network error', 'error'));
+            }
         }
+
+        // ============= SHUFFLE PLAYLIST =============
+        function shufflePlaylist() {
+            const songs = <?php echo json_encode($playlist); ?>;
+            if (songs.length < 2) {
+                showToast('Need at least 2 songs to shuffle', 'warning');
+                return;
+            }
+            
+            fetch('playlist_data.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'action=shuffle'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('🔄 ' + data.message, 'success');
+                    setTimeout(() => location.reload(), 300);
+                } else {
+                    showToast('❌ ' + data.message, 'error');
+                }
+            })
+            .catch(() => showToast('Network error', 'error'));
+        }
+
+        // Console info
+        console.log('🎵 Mood Melody Playlist');
+        console.log('📊 ' + <?php echo count($playlist); ?> + ' songs in playlist');
     </script>
 </body>
 </html>

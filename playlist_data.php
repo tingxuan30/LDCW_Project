@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
                 exit;
             }
             
-            // Check if song already exists in playlist (check by title and artist)
+            // Check if song already exists
             $exists = false;
             foreach ($_SESSION['playlist'] as $song) {
                 if ($song['title'] === $title && $song['artist'] === $artist) {
@@ -66,9 +66,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
             echo json_encode(['success' => true, 'message' => 'Playlist cleared']);
             break;
             
-        case 'get':
-            // Optional: Return playlist data (useful for debugging or AJAX)
-            echo json_encode(['success' => true, 'playlist' => $_SESSION['playlist']]);
+        case 'shuffle':
+            shuffle($_SESSION['playlist']);
+            echo json_encode(['success' => true, 'message' => 'Playlist shuffled']);
+            break;
+            
+        case 'remove':
+            $index = intval($_POST['index'] ?? -1);
+            if ($index >= 0 && isset($_SESSION['playlist'][$index])) {
+                $removed = $_SESSION['playlist'][$index];
+                array_splice($_SESSION['playlist'], $index, 1);
+                echo json_encode(['success' => true, 'message' => 'Removed: ' . $removed['title']]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Invalid index']);
+            }
             break;
             
         default:
