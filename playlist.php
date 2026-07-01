@@ -165,6 +165,7 @@ function getMoodColor($mood) {
                 <a href="playlist.php" class="nav-link <?php echo ($current_page == 'playlist') ? 'active' : ''; ?>">
                     Playlist <?php echo isset($_SESSION['playlist']) ? '(' . count($_SESSION['playlist']) . ')' : ''; ?>
                 </a>
+                <a href="achievements.php" class="nav-link <?php echo ($current_page == 'achievements') ? 'active' : ''; ?>">Achievements</a>
             </nav>
         </header>
 

@@ -18,9 +18,10 @@ function getUniqueArtists($playlist) {
     return array_keys($artists);
 }
 
+// Count total of moods user has (out of 10)
 function getMoodDiversity($playlist) {
     if (empty($playlist)) {
-        return ['count' => 0, 'total' => 10, 'percentage' => 0];  // Changed from 12 to 10
+        return ['count' => 0, 'total' => 10, 'percentage' => 0];
     }
     
     $moods = [];
@@ -28,7 +29,7 @@ function getMoodDiversity($playlist) {
     $allSongs = getAllSongs();
     
     $allMoodKeys = array_keys($allSongs);
-    $totalMoods = count($allMoodKeys); 
+    $totalMoods = count($allMoodKeys);
     
     foreach ($playlist as $song) {
         foreach ($allSongs as $mood => $data) {
@@ -50,6 +51,8 @@ function getMoodDiversity($playlist) {
         'percentage' => $percentage
     ];
 }
+
+// Count songs per mood in playlist
 function getMoodDistribution($playlist) {
     $moodCounts = [];
     if (empty($playlist)) return $moodCounts;
@@ -70,6 +73,7 @@ function getMoodDistribution($playlist) {
     return $moodCounts;
 }
 
+// Define all achievements and their unlock conditions
 function getAchievements($playlist) {
     $count = count($playlist);
     $uniqueArtists = count(getUniqueArtists($playlist));
@@ -77,12 +81,14 @@ function getAchievements($playlist) {
     $totalMoods = count($moodDistribution);
     
     return [
-        // COLLECTION ACHIEVEMENTS
+        // ============================================
+        // COLLECTION ACHIEVEMENTS - Song count
+        // ============================================
         [
             'id' => 'first_song',
             'icon' => '🎵', 
             'name' => 'First Song', 
-            'description' => 'Added your first song to the playlist',
+            'description' => 'Added your first song',
             'unlocked' => $count >= 1,
             'progress' => min(100, ($count / 1) * 100),
             'category' => 'collection'
@@ -100,74 +106,78 @@ function getAchievements($playlist) {
             'id' => 'playlist_curator',
             'icon' => '🎶', 
             'name' => 'Playlist Curator', 
-            'description' => '15 songs in your playlist',
-            'unlocked' => $count >= 15,
-            'progress' => min(100, ($count / 15) * 100),
+            'description' => '10 songs in your playlist',
+            'unlocked' => $count >= 10,
+            'progress' => min(100, ($count / 10) * 100),
             'category' => 'collection'
         ],
         [
             'id' => 'music_collector',
             'icon' => '🌟', 
             'name' => 'Music Collector', 
-            'description' => '30 songs in your playlist',
-            'unlocked' => $count >= 30,
-            'progress' => min(100, ($count / 30) * 100),
+            'description' => '20 songs in your playlist',
+            'unlocked' => $count >= 20,
+            'progress' => min(100, ($count / 20) * 100),
             'category' => 'collection'
         ],
         [
             'id' => 'music_maestro',
             'icon' => '🎼', 
             'name' => 'Music Maestro', 
-            'description' => '50 songs in your playlist',
-            'unlocked' => $count >= 50,
-            'progress' => min(100, ($count / 50) * 100),
+            'description' => '35 songs in your playlist',
+            'unlocked' => $count >= 35,
+            'progress' => min(100, ($count / 35) * 100),
             'category' => 'collection'
         ],
         [
             'id' => 'playlist_legend',
             'icon' => '🏆', 
             'name' => 'Playlist Legend', 
-            'description' => '100 songs in your playlist',
-            'unlocked' => $count >= 100,
-            'progress' => min(100, ($count / 100) * 100),
+            'description' => '50 songs in your playlist',
+            'unlocked' => $count >= 50,
+            'progress' => min(100, ($count / 50) * 100),
             'category' => 'collection'
         ],
         
-        // DIVERSITY ACHIEVEMENTS
+        // ============================================
+        // DIVERSITY ACHIEVEMENTS - Unique artists
+        // ============================================
         [
             'id' => 'diverse_listener',
             'icon' => '🎤', 
             'name' => 'Diverse Listener', 
-            'description' => '5+ artists in your playlist',
-            'unlocked' => $uniqueArtists >= 5,
-            'progress' => min(100, ($uniqueArtists / 5) * 100),
+            'description' => '3+ artists in your playlist',
+            'unlocked' => $uniqueArtists >= 3,
+            'progress' => min(100, ($uniqueArtists / 3) * 100),
             'category' => 'diversity'
         ],
         [
             'id' => 'artist_explorer',
             'icon' => '👥', 
             'name' => 'Artist Explorer', 
-            'description' => '15+ artists in your playlist',
-            'unlocked' => $uniqueArtists >= 15,
-            'progress' => min(100, ($uniqueArtists / 15) * 100),
+            'description' => '8+ artists in your playlist',
+            'unlocked' => $uniqueArtists >= 8,
+            'progress' => min(100, ($uniqueArtists / 8) * 100),
             'category' => 'diversity'
         ],
         [
             'id' => 'music_encyclopedia',
             'icon' => '📖', 
             'name' => 'Music Encyclopedia', 
-            'description' => '30+ artists in your playlist',
-            'unlocked' => $uniqueArtists >= 30,
-            'progress' => min(100, ($uniqueArtists / 30) * 100),
+            'description' => '15+ artists in your playlist',
+            'unlocked' => $uniqueArtists >= 15,
+            'progress' => min(100, ($uniqueArtists / 15) * 100),
             'category' => 'diversity'
         ],
         
-        // MOOD ACHIEVEMENTS
+        // ============================================
+        // MOOD ACHIEVEMENTS - Different moods
+        // ============================================
         [
             'id' => 'mood_explorer',
             'icon' => '🌈', 
             'name' => 'Mood Explorer', 
-            'description' => 'Songs from 3+ different moods',
+            'description' => 'Songs from 3+ moods',
             'unlocked' => $totalMoods >= 3,
             'progress' => min(100, ($totalMoods / 3) * 100),
             'category' => 'mood'
@@ -176,7 +186,7 @@ function getAchievements($playlist) {
             'id' => 'mood_master',
             'icon' => '🎨', 
             'name' => 'Mood Master', 
-            'description' => 'Songs from 6+ different moods',
+            'description' => 'Songs from 6+ moods',
             'unlocked' => $totalMoods >= 6,
             'progress' => min(100, ($totalMoods / 6) * 100),
             'category' => 'mood'
@@ -185,9 +195,9 @@ function getAchievements($playlist) {
             'id' => 'mood_legend',
             'icon' => '🌟', 
             'name' => 'Mood Legend', 
-            'description' => 'Songs from all 10 moods', 
-            'unlocked' => $totalMoods >= 10,        
-            'progress' => min(100, ($totalMoods / 10) * 100), 
+            'description' => 'Songs from all 10 moods',
+            'unlocked' => $totalMoods >= 10,
+            'progress' => min(100, ($totalMoods / 10) * 100),
             'category' => 'mood'
         ],
     ];
@@ -202,7 +212,6 @@ $uniqueArtists = count(getUniqueArtists($playlist));
 
 $moodDiversityData = getMoodDiversity($playlist);
 $moodDiversityDisplay = $moodDiversityData['count'] . '/' . $moodDiversityData['total'];
-$moodDiversityPercentage = $moodDiversityData['percentage'];
 
 // Group achievements by category
 $categories = [
@@ -649,7 +658,6 @@ foreach ($achievements as $achievement) {
             </div>
             <div class="overview-card">
                 <span class="icon">🎨</span>
-                <!-- FIXED: Changed from percentage to X/12 format -->
                 <span class="number"><?php echo $moodDiversityDisplay; ?></span>
                 <span class="label">Mood Diversity</span>
             </div>
@@ -742,7 +750,7 @@ foreach ($achievements as $achievement) {
             }
         });
 
-        //Loading progess bars
+        // Loading progress bars
         document.addEventListener('DOMContentLoaded', function() {
             const progressBars = document.querySelectorAll('.ach-progress-fill');
             progressBars.forEach((bar, index) => {
