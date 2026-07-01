@@ -2,29 +2,6 @@
 // ============================================
 // SONG DATABASE - Shared across all pages
 // ============================================
-
-// Mood emoji mapping for easy reference
-function getMoodEmojis() {
-    return [
-        'happy' => '😊',
-        'sad' => '😢',
-        'energetic' => '⚡',
-        'chill' => '😌',
-        'romantic' => '❤️',
-        'motivated' => '💪',
-        'nostalgic' => '🕰️',
-        'angry' => '😤',
-        'anxious' => '😰',
-        'grateful' => '🙏'
-    ];
-}
-
-// Get emoji for a specific mood
-function getMoodEmoji($mood) {
-    $emojis = getMoodEmojis();
-    return $emojis[$mood] ?? '🎵';
-}
-
 function getAllSongs() {
     return [
         'happy' => [
