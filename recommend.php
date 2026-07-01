@@ -109,7 +109,7 @@ $moodEmojis = [
 
         <div class="action-section">
             <a href="index.php" class="btn btn-secondary">
-                <span class="btn-icon">←</span> Select Another Mood
+                <span class="btn-icon">🠄</span> Select Another Mood
             </a>
         </div>
             

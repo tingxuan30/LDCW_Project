@@ -231,7 +231,7 @@ function getMoodColor($mood) {
         <!-- Playlist Actions -->
         <div class="playlist-actions-wrapper">
             <div class="playlist-actions-left">
-                <a href="index.php" class="btn btn-secondary">← Add More Songs</a>
+                <a href="index.php" class="btn btn-secondary">🠄 Add More Songs</a>
             </div>
             <div class="playlist-actions-right">
                 <button onclick="shufflePlaylist()" class="btn btn-warning">⇄ Shuffle</button>

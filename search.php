@@ -154,7 +154,7 @@ $moodEmojis = [
                         No songs found for "<strong><?php echo htmlspecialchars($searchQuery); ?></strong>"
                     <?php endif; ?>
                 </h2>
-                <a href="index.php" class="back-link">← Back to Home</a>
+                <a href="index.php" class="back-link">🠄 Back to Home</a>
             </div>
 
             <?php if (count($searchResults) > 0): ?>
