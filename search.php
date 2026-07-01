@@ -230,7 +230,6 @@ $moodEmojis = [
                         const response = JSON.parse(this.responseText);
                         if (response.success) {
                             alert('✅ "' + title + '" added to your playlist!');
-                            // Update the playlist count in navigation
                             updatePlaylistCount();
                         } else {
                             alert('⚠️ ' + response.message);
@@ -249,7 +248,7 @@ $moodEmojis = [
         }
 
         // ============================================
-        // UPDATE PLAYLIST COUNT IN NAVIGATION
+        // UPDATE PLAYLIST COUNT IN TAB
         // ============================================
         function updatePlaylistCount() {
             const playlistLink = document.getElementById('playlistLink');

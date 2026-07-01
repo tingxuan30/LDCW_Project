@@ -196,7 +196,6 @@ $moodEmojis = [
                     const response = JSON.parse(this.responseText);
                     if (response.success) {
                         alert('✅ "' + title + '" added to your playlist!');
-                        // Optional: Update playlist count in navigation
                         updatePlaylistCount();
                     } else {
                         alert('⚠️ ' + response.message);

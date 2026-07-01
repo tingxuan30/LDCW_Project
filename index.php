@@ -12,9 +12,7 @@ $current_page = 'home';
     <link rel="stylesheet" href="dark_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ============================================
-           SURPRISE BUTTON STYLES
-        ============================================ */
+        /* SURPRISE BUTTON STYLES */
         .emotion-card.emotion-uncertain {
             grid-column: 1 / -1;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
@@ -231,7 +229,7 @@ $current_page = 'home';
             margin-bottom: 15px;
         }
         
-        /* Give It A Try button - Spotify green */
+        /* Give It A Try button */
         .modal-buttons .btn-primary {
             background: #1DB954;
             color: #ffffff;
@@ -433,9 +431,8 @@ $current_page = 'home';
     });
 
     // ============================================
-    // SURPRISE ME! FUNCTIONALITY
+    // RANDOMLY SUGGEST A SONG FUNCTIONALITY
     // ============================================
-    
     const allSongsData = <?php 
         require_once 'song_database.php';
         $allSongs = getAllSongs();
@@ -489,7 +486,7 @@ $current_page = 'home';
             </div>
         `;
         
-        // Set the "Give It A Try" button (Spotify link)
+        // Set the "Give It A Try" button
         const playBtn = document.getElementById('modalPlayBtn');
         playBtn.href = song.spotify || '#';
         playBtn.target = '_blank';

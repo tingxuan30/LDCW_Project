@@ -144,7 +144,7 @@ function getMoodColor($mood) {
     </style>
 </head>
 <body>
-    <!-- Dark Mode Toggle - MOVED OUTSIDE container for proper fixed positioning -->
+    <!-- Dark Mode Toggle -->
     <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
         🌙
     </button> 
@@ -502,9 +502,7 @@ function getMoodColor($mood) {
         console.log('🎵 Mood Melody Playlist');
         console.log('📊 ' + <?php echo count($playlist); ?> + ' songs in playlist');
 
-        // ============================================
-        // DARK MODE TOGGLE - FIXED VERSION
-        // ============================================
+        // Dark mode toggle
         (function() {
             const toggle = document.getElementById('darkModeToggle');
             const body = document.body;
