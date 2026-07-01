@@ -153,8 +153,8 @@ function getMoodColor($mood) {
         <!-- Header -->
         <header class="header">
             <div class="header-brand">
-                <span class="brand-icon">♪</span>
                 <h1>Mood Melody</h1>
+                <span class="brand-icon">©</span>
             </div>
             <p class="header-subtitle">Keep Every Song You Love in One Place</p>
             <div class="header-divider"></div>
