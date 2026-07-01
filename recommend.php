@@ -29,6 +29,20 @@ $mood = $recommendationData['mood'];
 $energy = $recommendationData['energy'];
 $description = $recommendationData['description'];
 $songs = $recommendationData['songs'];
+
+// Mood emoji mapping
+$moodEmojis = [
+    'happy' => '😊',
+    'sad' => '😢',
+    'energetic' => '⚡',
+    'chill' => '😌',
+    'romantic' => '❤️',
+    'motivated' => '💪',
+    'nostalgic' => '🕰️',
+    'angry' => '😤',
+    'anxious' => '😰',
+    'grateful' => '🙏'
+];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,6 +64,30 @@ $songs = $recommendationData['songs'];
             align-items: center;
             gap: 8px;
         }
+        /* Mood tag styling for recommend page */
+        .mood-tag-small {
+            background: rgba(74, 108, 247, 0.1);
+            padding: 2px 10px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            color: #4a6cf7;
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            gap: 4px;
+            font-weight: 500;
+        }
+        /* Different mood tag colors */
+        .mood-tag-small.mood-happy { background: rgba(251, 191, 36, 0.15); color: #92400e; }
+        .mood-tag-small.mood-sad { background: rgba(96, 165, 250, 0.15); color: #1e3a8a; }
+        .mood-tag-small.mood-energetic { background: rgba(248, 113, 113, 0.15); color: #7f1d1d; }
+        .mood-tag-small.mood-chill { background: rgba(52, 211, 153, 0.15); color: #065f46; }
+        .mood-tag-small.mood-romantic { background: rgba(244, 114, 182, 0.15); color: #831843; }
+        .mood-tag-small.mood-motivated { background: rgba(167, 139, 250, 0.15); color: #4c1d95; }
+        .mood-tag-small.mood-nostalgic { background: rgba(251, 146, 60, 0.15); color: #7c2d12; }
+        .mood-tag-small.mood-angry { background: rgba(239, 68, 68, 0.15); color: #7f1d1d; }
+        .mood-tag-small.mood-anxious { background: rgba(129, 140, 248, 0.15); color: #312e81; }
+        .mood-tag-small.mood-grateful { background: rgba(110, 231, 183, 0.15); color: #065f46; }
     </style>
 </head>
 <body>
@@ -99,9 +137,9 @@ $songs = $recommendationData['songs'];
                         $imagePath = isset($song['image']) ? $song['image'] : 'image/default-album.jpg';
                         ?>
                         <img src="<?php echo htmlspecialchars($imagePath); ?>" 
-                            alt="<?php echo htmlspecialchars($song['title']); ?> album art" 
-                            class="song-album-image"
-                            onerror="this.src='image/default-album.jpg'">
+                             alt="<?php echo htmlspecialchars($song['title']); ?> album art" 
+                             class="song-album-image"
+                             onerror="this.src='image/default-album.jpg'">
                     </div>
                     <div class="song-info">
                         <h3 class="song-title-small"><?php echo htmlspecialchars($song['title']); ?></h3>
@@ -111,22 +149,10 @@ $songs = $recommendationData['songs'];
                             <span class="dot">·</span>
                             <span><?php echo $song['tempo']; ?></span>
                             <span class="dot">·</span>
-                            <span class="mood-tag-small">
+                            <span class="mood-tag-small mood-<?php echo $emotion; ?>">
                                 <?php 
-                                $moodEmojis = [
-                                    'happy' => '😊',
-                                    'sad' => '😢',
-                                    'energetic' => '⚡',
-                                    'chill' => '😌',
-                                    'romantic' => '❤️',
-                                    'motivated' => '💪',
-                                    'nostalgic' => '🕰️',
-                                    'angry' => '😤',
-                                    'anxious' => '😰',
-                                    'grateful' => '🙏'
-                                ];
                                 $emoji = $moodEmojis[$emotion] ?? '🎵';
-                                echo $emoji . ' ' . $mood; 
+                                echo $emoji . ' ' . ucfirst($emotion); 
                                 ?>
                             </span>
                         </div>
@@ -176,7 +202,7 @@ $songs = $recommendationData['songs'];
                         alert('⚠️ ' + response.message);
                     }
                 } catch(e) {
-                    aconsole.error('Error parsing response:', e);
+                    console.error('Error parsing response:', e);
                 }
             }
         };
