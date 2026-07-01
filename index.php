@@ -228,6 +228,30 @@ $current_page = 'home';
             flex: 1;
             justify-content: center;
             min-width: 120px;
+            margin-bottom: 15px;
+        }
+        
+        /* Give It A Try button - Spotify green */
+        .modal-buttons .btn-primary {
+            background: #1DB954;
+            color: #ffffff;
+            border-color: #1DB954;
+        }
+        
+        .modal-buttons .btn-primary:hover {
+            background: #1ed760;
+            border-color: #1ed760;
+        }
+        
+        .modal-buttons .btn-secondary {
+            background: #8b5cf6;
+            color: #ffffff;
+            border-color: #8b5cf6;
+        }
+        
+        .modal-buttons .btn-secondary:hover {
+            background: #7c3aed;
+            border-color: #7c3aed;
         }
         
         @keyframes fadeIn {
@@ -285,7 +309,8 @@ $current_page = 'home';
                 <div id="modalSongContent">
                 </div>
                 <div class="modal-buttons">
-                    <a href="#" id="modalPlaylistBtn" class="btn btn-primary">✚ Add to Playlist</a>
+                    <a href="#" id="modalPlayBtn" class="btn btn-primary" target="_blank">▶ Give It A Try</a>
+                    <a href="#" id="modalPlaylistBtn" class="btn btn-secondary">✚ Add to Playlist</a>
                 </div>
             </div>
         </div>
@@ -319,7 +344,7 @@ $current_page = 'home';
             <!-- Emotion Selection Form -->
             <form action="recommend.php" method="POST" class="emotion-form">
                 <div class="emotion-grid">
-                    <!-- Emotion Cards - No Emojis -->
+                    <!-- Emotion Cards -->
                     <button type="submit" name="emotion" value="happy" class="emotion-card emotion-happy">
                         <span class="emotion-name">😊 Happy</span>
                         <span class="emotion-desc">Joyful & Uplifting</span>
@@ -391,7 +416,6 @@ $current_page = 'home';
     const toggle = document.getElementById('darkModeToggle');
     const body = document.body;
     
-    // Check saved preference
     if (localStorage.getItem('darkMode') === 'enabled') {
         body.classList.add('dark-mode');
         toggle.textContent = '☀️';
@@ -399,7 +423,6 @@ $current_page = 'home';
     
     toggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
-        
         if (body.classList.contains('dark-mode')) {
             localStorage.setItem('darkMode', 'enabled');
             toggle.textContent = '☀️';
@@ -413,7 +436,6 @@ $current_page = 'home';
     // SURPRISE ME! FUNCTIONALITY
     // ============================================
     
-    // All songs data (embedded for quick access)
     const allSongsData = <?php 
         require_once 'song_database.php';
         $allSongs = getAllSongs();
@@ -446,15 +468,11 @@ $current_page = 'home';
             return;
         }
         
-        // Pick a random song
         const randomIndex = Math.floor(Math.random() * allSongsData.length);
         const song = allSongsData[randomIndex];
         const emoji = moodEmojis[song.mood_key] || '🎵';
-        
-        // Get the image path (use default if not available)
         const imagePath = song.image || 'image/default-album.jpg';
         
-        // Build modal content with album art
         const modalContent = document.getElementById('modalSongContent');
         modalContent.innerHTML = `
             <div class="modal-song">
@@ -471,14 +489,18 @@ $current_page = 'home';
             </div>
         `;
         
-        // Set the Add to Playlist button
+        // Set the "Give It A Try" button (Spotify link)
+        const playBtn = document.getElementById('modalPlayBtn');
+        playBtn.href = song.spotify || '#';
+        playBtn.target = '_blank';
+        
+        // Set the "Add to Playlist" button
         const playlistBtn = document.getElementById('modalPlaylistBtn');
         playlistBtn.onclick = function(e) {
             e.preventDefault();
             addToPlaylistFromModal(song);
         };
         
-        // Show the modal
         document.getElementById('surpriseModal').classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -497,11 +519,8 @@ $current_page = 'home';
                 try {
                     const response = JSON.parse(this.responseText);
                     if (response.success) {
-                        // Show success toast
                         showToast('✅ "' + song.title + '" added to your playlist!', 'success');
-                        // Update playlist count in navigation
                         updatePlaylistCount();
-                        // Close modal after a moment
                         setTimeout(closeSurprise, 800);
                     } else {
                         showToast('⚠️ ' + response.message, 'warning');
@@ -584,7 +603,9 @@ $current_page = 'home';
         }
     }
 
-    // Close modal on overlay click
+    // ============================================
+    // CLOSE MODAL ON OVERLAY CLICK
+    // ============================================
     document.getElementById('surpriseModal').addEventListener('click', function(e) {
         if (e.target === this) {
             closeSurprise();
