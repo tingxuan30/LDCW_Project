@@ -9,16 +9,7 @@ if (!isset($_SESSION['playlist'])) {
 
 $playlist = $_SESSION['playlist'];
 
-// Get list of unique artists from playlist
-function getUniqueArtists($playlist) {
-    $artists = [];
-    foreach ($playlist as $song) {
-        $artists[$song['artist']] = true;
-    }
-    return array_keys($artists);
-}
-
-// Count total of moods user has (out of 10)
+// Count total of moods user has
 function getMoodDiversity($playlist) {
     if (empty($playlist)) {
         return ['count' => 0, 'total' => 10, 'percentage' => 0];
@@ -73,132 +64,44 @@ function getMoodDistribution($playlist) {
     return $moodCounts;
 }
 
-// Define all achievements and their unlock conditions
+// Define mood achievements
 function getAchievements($playlist) {
-    $count = count($playlist);
-    $uniqueArtists = count(getUniqueArtists($playlist));
     $moodDistribution = getMoodDistribution($playlist);
     $totalMoods = count($moodDistribution);
     
     return [
         // ============================================
-        // COLLECTION ACHIEVEMENTS - Song count
-        // ============================================
-        [
-            'id' => 'first_song',
-            'icon' => '🎵', 
-            'name' => 'First Song', 
-            'description' => 'Added your first song',
-            'unlocked' => $count >= 1,
-            'progress' => min(100, ($count / 1) * 100),
-            'category' => 'collection'
-        ],
-        [
-            'id' => 'music_lover',
-            'icon' => '📚', 
-            'name' => 'Music Lover', 
-            'description' => '5 songs in your playlist',
-            'unlocked' => $count >= 5,
-            'progress' => min(100, ($count / 5) * 100),
-            'category' => 'collection'
-        ],
-        [
-            'id' => 'playlist_curator',
-            'icon' => '🎶', 
-            'name' => 'Playlist Curator', 
-            'description' => '10 songs in your playlist',
-            'unlocked' => $count >= 10,
-            'progress' => min(100, ($count / 10) * 100),
-            'category' => 'collection'
-        ],
-        [
-            'id' => 'music_collector',
-            'icon' => '🌟', 
-            'name' => 'Music Collector', 
-            'description' => '20 songs in your playlist',
-            'unlocked' => $count >= 20,
-            'progress' => min(100, ($count / 20) * 100),
-            'category' => 'collection'
-        ],
-        [
-            'id' => 'music_maestro',
-            'icon' => '🎼', 
-            'name' => 'Music Maestro', 
-            'description' => '35 songs in your playlist',
-            'unlocked' => $count >= 35,
-            'progress' => min(100, ($count / 35) * 100),
-            'category' => 'collection'
-        ],
-        [
-            'id' => 'playlist_legend',
-            'icon' => '🏆', 
-            'name' => 'Playlist Legend', 
-            'description' => '50 songs in your playlist',
-            'unlocked' => $count >= 50,
-            'progress' => min(100, ($count / 50) * 100),
-            'category' => 'collection'
-        ],
-        
-        // ============================================
-        // DIVERSITY ACHIEVEMENTS - Unique artists
-        // ============================================
-        [
-            'id' => 'diverse_listener',
-            'icon' => '🎤', 
-            'name' => 'Diverse Listener', 
-            'description' => '3+ artists in your playlist',
-            'unlocked' => $uniqueArtists >= 3,
-            'progress' => min(100, ($uniqueArtists / 3) * 100),
-            'category' => 'diversity'
-        ],
-        [
-            'id' => 'artist_explorer',
-            'icon' => '👥', 
-            'name' => 'Artist Explorer', 
-            'description' => '8+ artists in your playlist',
-            'unlocked' => $uniqueArtists >= 8,
-            'progress' => min(100, ($uniqueArtists / 8) * 100),
-            'category' => 'diversity'
-        ],
-        [
-            'id' => 'music_encyclopedia',
-            'icon' => '📖', 
-            'name' => 'Music Encyclopedia', 
-            'description' => '15+ artists in your playlist',
-            'unlocked' => $uniqueArtists >= 15,
-            'progress' => min(100, ($uniqueArtists / 15) * 100),
-            'category' => 'diversity'
-        ],
-        
-        // ============================================
-        // MOOD ACHIEVEMENTS - Different moods
+        // MOOD ACHIEVEMENTS - Different moods collected
         // ============================================
         [
             'id' => 'mood_explorer',
             'icon' => '🌈', 
             'name' => 'Mood Explorer', 
-            'description' => 'Songs from 3+ moods',
+            'description' => 'Collect songs from 3+ moods',
             'unlocked' => $totalMoods >= 3,
             'progress' => min(100, ($totalMoods / 3) * 100),
-            'category' => 'mood'
+            'current' => $totalMoods,
+            'required' => 3
         ],
         [
             'id' => 'mood_master',
             'icon' => '🎨', 
             'name' => 'Mood Master', 
-            'description' => 'Songs from 6+ moods',
+            'description' => 'Collect songs from 6+ moods',
             'unlocked' => $totalMoods >= 6,
             'progress' => min(100, ($totalMoods / 6) * 100),
-            'category' => 'mood'
+            'current' => $totalMoods,
+            'required' => 6
         ],
         [
             'id' => 'mood_legend',
             'icon' => '🌟', 
             'name' => 'Mood Legend', 
-            'description' => 'Songs from all 10 moods',
+            'description' => 'Collect songs from all 10 moods',
             'unlocked' => $totalMoods >= 10,
             'progress' => min(100, ($totalMoods / 10) * 100),
-            'category' => 'mood'
+            'current' => $totalMoods,
+            'required' => 10
         ],
     ];
 }
@@ -208,38 +111,20 @@ $totalAchievements = count($achievements);
 $unlockedCount = count(array_filter($achievements, function($a) { return $a['unlocked']; }));
 $progressPercentage = $totalAchievements > 0 ? round(($unlockedCount / $totalAchievements) * 100) : 0;
 $totalSongs = count($playlist);
-$uniqueArtists = count(getUniqueArtists($playlist));
 
 $moodDiversityData = getMoodDiversity($playlist);
 $moodDiversityDisplay = $moodDiversityData['count'] . '/' . $moodDiversityData['total'];
-
-// Group achievements by category
-$categories = [
-    'collection' => ['name' => 'Collection', 'icon' => '📀'],
-    'diversity' => ['name' => 'Diversity', 'icon' => '👥'],
-    'mood' => ['name' => 'Mood', 'icon' => '🎨']
-];
-
-$groupedAchievements = [];
-foreach ($achievements as $achievement) {
-    $category = $achievement['category'];
-    if (!isset($groupedAchievements[$category])) {
-        $groupedAchievements[$category] = [];
-    }
-    $groupedAchievements[$category][] = $achievement;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achievements · Mood Melody</title>
+    <title>Mood Achievements · Mood Melody</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dark_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-
         /* Achievements Header */
         .achievements-header {
             text-align: center;
@@ -261,9 +146,12 @@ foreach ($achievements as $achievement) {
         /* Progress Overview */
         .achievement-overview {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
             margin-bottom: 32px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .overview-card {
@@ -307,6 +195,9 @@ foreach ($achievements as $achievement) {
             padding: 20px 24px;
             margin-bottom: 32px;
             border: 1px solid #e5e7eb;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .overall-progress-header {
@@ -348,40 +239,24 @@ foreach ($achievements as $achievement) {
             transition: width 1s ease;
         }
 
-        /* Category Sections */
-        .category-section {
-            margin-bottom: 32px;
+        /* Mood Achievements Grid */
+        .mood-achievements-section {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .category-header .cat-icon {
-            font-size: 1.5rem;
-        }
-
-        .category-header .cat-name {
-            font-size: 1.2rem;
+        .mood-achievements-title {
+            font-size: 1.3rem;
             font-weight: 600;
             color: #1a1a2e;
+            margin-bottom: 16px;
+            text-align: center;
         }
 
-        .category-header .cat-count {
-            font-size: 0.85rem;
-            color: #6b7280;
-            margin-left: auto;
-        }
-
-        /* Achievement Grid */
         .achievement-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 16px;
         }
 
@@ -433,8 +308,33 @@ foreach ($achievements as $achievement) {
             font-size: 0.75rem;
             color: #6b7280;
             display: block;
-            margin: 4px 0 10px 0;
+            margin: 4px 0 8px 0;
             line-height: 1.3;
+        }
+
+        /* Progress display - ?/3 or ?/6 */
+        .ach-progress-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4a6cf7;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .ach-progress-text .current {
+            color: #4a6cf7;
+        }
+
+        .ach-progress-text .required {
+            color: #9ca3af;
+        }
+
+        .achievement-card.unlocked .ach-progress-text .current {
+            color: #f59e0b;
+        }
+
+        .achievement-card.unlocked .ach-progress-text .required {
+            color: #fbbf24;
         }
 
         .achievement-card .ach-progress {
@@ -553,16 +453,8 @@ foreach ($achievements as $achievement) {
             background: #2a2a5a;
         }
 
-        body.dark-mode .category-header {
-            border-bottom-color: #2a2a5a;
-        }
-
-        body.dark-mode .category-header .cat-name {
+        body.dark-mode .mood-achievements-title {
             color: #e8e8f0;
-        }
-
-        body.dark-mode .category-header .cat-count {
-            color: #a8a8c0;
         }
 
         body.dark-mode .achievement-card {
@@ -581,6 +473,26 @@ foreach ($achievements as $achievement) {
 
         body.dark-mode .achievement-card .ach-desc {
             color: #a8a8c0;
+        }
+
+        body.dark-mode .ach-progress-text {
+            color: #818cf8;
+        }
+
+        body.dark-mode .ach-progress-text .current {
+            color: #818cf8;
+        }
+
+        body.dark-mode .ach-progress-text .required {
+            color: #6a6a8a;
+        }
+
+        body.dark-mode .achievement-card.unlocked .ach-progress-text .current {
+            color: #f59e0b;
+        }
+
+        body.dark-mode .achievement-card.unlocked .ach-progress-text .required {
+            color: #fbbf24;
         }
 
         body.dark-mode .achievement-card .ach-progress {
@@ -610,6 +522,23 @@ foreach ($achievements as $achievement) {
         body.dark-mode .empty-achievements p {
             color: #a8a8c0;
         }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .achievement-overview {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .achievement-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .overview-card .number {
+                font-size: 1.6rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -625,7 +554,7 @@ foreach ($achievements as $achievement) {
                 <h1>Mood Melody</h1>
                 <span class="brand-icon">©</span>
             </div>
-            <p class="header-subtitle">Your Music Achievements</p>
+            <p class="header-subtitle">Your Mood Achievements</p>
             <div class="header-divider"></div>
 
             <nav class="main-nav">
@@ -640,8 +569,8 @@ foreach ($achievements as $achievement) {
 
         <!-- Achievements Header -->
         <div class="achievements-header">
-            <h2>🏆 Achievements</h2>
-            <p class="subtitle">Track your progress and unlock badges as you build your playlist</p>
+            <h2>🏆 Mood Achievements</h2>
+            <p class="subtitle">Collect songs from different moods to unlock badges</p>
         </div>
 
         <!-- Overview Stats -->
@@ -652,14 +581,9 @@ foreach ($achievements as $achievement) {
                 <span class="label">Songs in Playlist</span>
             </div>
             <div class="overview-card">
-                <span class="icon">👥</span>
-                <span class="number"><?php echo $uniqueArtists; ?></span>
-                <span class="label">Artists</span>
-            </div>
-            <div class="overview-card">
                 <span class="icon">🎨</span>
                 <span class="number"><?php echo $moodDiversityDisplay; ?></span>
-                <span class="label">Mood Diversity</span>
+                <span class="label">Moods Collected</span>
             </div>
             <div class="overview-card">
                 <span class="icon">🏆</span>
@@ -680,23 +604,22 @@ foreach ($achievements as $achievement) {
         </div>
 
         <?php if ($totalSongs > 0): ?>
-            <!-- Achievements by Category -->
-            <?php foreach ($groupedAchievements as $category => $items): 
-                $catInfo = $categories[$category] ?? ['name' => ucfirst($category), 'icon' => '📀'];
-                $unlockedInCat = count(array_filter($items, function($a) { return $a['unlocked']; }));
-            ?>
-            <div class="category-section">
-                <div class="category-header">
-                    <span class="cat-icon"><?php echo $catInfo['icon']; ?></span>
-                    <span class="cat-name"><?php echo $catInfo['name']; ?></span>
-                    <span class="cat-count"><?php echo $unlockedInCat; ?>/<?php echo count($items); ?> unlocked</span>
-                </div>
+            <!-- Mood Achievements -->
+            <div class="mood-achievements-section">
+                <div class="mood-achievements-title">🎨 Mood Achievements</div>
                 <div class="achievement-grid">
-                    <?php foreach ($items as $achievement): ?>
+                    <?php foreach ($achievements as $achievement): ?>
                     <div class="achievement-card <?php echo $achievement['unlocked'] ? 'unlocked' : 'locked'; ?>">
                         <span class="ach-icon"><?php echo $achievement['icon']; ?></span>
                         <span class="ach-name"><?php echo $achievement['name']; ?></span>
                         <span class="ach-desc"><?php echo $achievement['description']; ?></span>
+                        
+                        <!-- Progress Display -->
+                        <span class="ach-progress-text">
+                            <span class="current"><?php echo $achievement['current']; ?></span>
+                            <span class="required">/ <?php echo $achievement['required']; ?></span>
+                        </span>
+                        
                         <div class="ach-progress">
                             <div class="ach-progress-fill" style="width: <?php echo min(100, $achievement['progress']); ?>%;"></div>
                         </div>
@@ -707,13 +630,12 @@ foreach ($achievements as $achievement) {
                     <?php endforeach; ?>
                 </div>
             </div>
-            <?php endforeach; ?>
         <?php else: ?>
             <!-- Empty State -->
             <div class="empty-achievements">
                 <span class="big-icon">🏆</span>
                 <h3>No Achievements Yet</h3>
-                <p>Start building your playlist to unlock achievements!</p>
+                <p>Start building your playlist to unlock mood achievements!</p>
                 <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
                     <a href="index.php" class="btn btn-primary">⭐ Get Recommendations</a>
                     <a href="search.php" class="btn btn-secondary">🔍︎ Search Songs</a>
@@ -723,7 +645,7 @@ foreach ($achievements as $achievement) {
 
         <!-- Footer -->
         <div class="footer-info">
-            <p class="footer-text">Keep adding songs to unlock more achievements!</p>
+            <p class="footer-text">Collect songs from different moods to unlock achievements!</p>
             <p class="footer-copyright">© 2026 Mood Melody · LDCW6123 Group Project</p>
         </div>
     </div>
@@ -762,7 +684,7 @@ foreach ($achievements as $achievement) {
             });
         });
 
-        console.log('🏆 Achievements page loaded');
+        console.log('🏆 Mood Achievements page loaded');
         console.log('📊 ' + <?php echo $unlockedCount; ?> + ' achievements unlocked out of ' + <?php echo $totalAchievements; ?>);
         console.log('🎨 Mood Diversity: ' + '<?php echo $moodDiversityDisplay; ?>');
     </script>
