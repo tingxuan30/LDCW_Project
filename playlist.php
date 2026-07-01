@@ -208,7 +208,7 @@ function getMoodColor($mood) {
                 </div>
             <?php else: ?>
                 <div class="stat-item">
-                    <span class="stat-number">🎵</span>
+                    <span class="stat-number">😶</span>
                     <span class="stat-label">Add songs to discover<br>your dominant mood</span>
                 </div>
             <?php endif; ?>
@@ -331,7 +331,7 @@ function getMoodColor($mood) {
                 Start building your playlist by searching for songs or getting recommendations.
             </p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
-                <a href="index.php" class="btn btn-primary">🎵 Get Recommendations</a>
+                <a href="index.php" class="btn btn-primary">⭐ Get Recommendations</a>
                 <a href="search.php" class="btn btn-secondary">🔍︎ Search Songs</a>
             </div>
         </div>

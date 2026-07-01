@@ -488,7 +488,7 @@ function getAllSongs() {
                     'image' => 'image/blessings.png'
                 ],
                 [
-                    'title' => 'Thank You For Everthing',
+                    'title' => 'Thank You For Everything',
                     'artist' => 'Diego Gonzalez',
                     'year' => '2023',
                     'tempo' => '85 BPM',
