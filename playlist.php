@@ -16,10 +16,16 @@ $playlist = $_SESSION['playlist'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Playlist · Mood Melody</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dark_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container playlist-container">
+    <!-- Dark Mode Toggle - MOVED OUTSIDE container for proper fixed positioning -->
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+        🌙
+    </button> 
+    
+    <div class="container playlist-container">      
         <!-- Header -->
         <header class="header">
             <div class="header-brand">
@@ -113,7 +119,7 @@ $playlist = $_SESSION['playlist'];
                         ▶ Play
                     </a>
                     <button onclick="removeSong(<?php echo $index; ?>)" class="btn btn-small btn-remove">
-                        ✕ Remove
+                        🗑️
                     </button>
                 </div>
             </div>
@@ -174,7 +180,7 @@ $playlist = $_SESSION['playlist'];
                 `;
                 document.body.appendChild(toast);
             }
-            
+
             const colors = {
                 success: '#1DB954',
                 error: '#dc3545',
@@ -184,7 +190,7 @@ $playlist = $_SESSION['playlist'];
             toast.style.background = colors[type] || '#333';
             toast.textContent = message;
             toast.style.opacity = '1';
-            
+
             setTimeout(() => {
                 toast.style.opacity = '0';
             }, 4000);
@@ -196,11 +202,11 @@ $playlist = $_SESSION['playlist'];
             const filter = input.value.toLowerCase();
             const items = document.querySelectorAll('.search-item');
             let visibleCount = 0;
-            
+
             items.forEach(item => {
                 const title = item.getAttribute('data-title') || '';
                 const artist = item.getAttribute('data-artist') || '';
-                
+
                 if (title.includes(filter) || artist.includes(filter)) {
                     item.style.display = 'flex';
                     visibleCount++;
@@ -208,7 +214,7 @@ $playlist = $_SESSION['playlist'];
                     item.style.display = 'none';
                 }
             });
-            
+
             // Show/hide no results message
             const noResults = document.getElementById('noResults');
             if (noResults) {
@@ -221,11 +227,14 @@ $playlist = $_SESSION['playlist'];
         }
 
         // Enter key support
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                filterPlaylist();
-            }
-        });
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    filterPlaylist();
+                }
+            });
+        }
 
         //Remove Song Function
         function removeSong(index) {
@@ -280,7 +289,7 @@ $playlist = $_SESSION['playlist'];
                 showToast('Need at least 2 songs to shuffle', 'warning');
                 return;
             }
-            
+
             fetch('playlist_data.php', {
                 method: 'POST',
                 headers: {
@@ -303,6 +312,44 @@ $playlist = $_SESSION['playlist'];
         // Console info
         console.log('🎵 Mood Melody Playlist');
         console.log('📊 ' + <?php echo count($playlist); ?> + ' songs in playlist');
+
+        // ============================================
+        // DARK MODE TOGGLE - FIXED VERSION
+        // ============================================
+        (function() {
+            const toggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            
+            if (!toggle) {
+                console.error('Dark mode toggle button not found!');
+                return;
+            }
+
+            // Check saved preference
+            const darkMode = localStorage.getItem('darkMode');
+            if (darkMode === 'enabled') {
+                body.classList.add('dark-mode');
+                toggle.textContent = '☀️';
+            }
+
+            // Toggle function
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                body.classList.toggle('dark-mode');
+
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    toggle.textContent = '☀️';
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    toggle.textContent = '🌙';
+                }
+            });
+
+            console.log('🌓 Dark mode toggle initialized');
+        })();
     </script>
 </body>
 </html>

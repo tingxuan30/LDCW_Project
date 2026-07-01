@@ -9,10 +9,16 @@ $current_page = 'home';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mood Melody - Song Recommendation System</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dark_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
+        <!-- Dark Mode Toggle -->
+        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+            🌙
+        </button>
+
         <!-- Header -->
         <header class="header">
             <div class="header-brand">
@@ -105,3 +111,27 @@ $current_page = 'home';
     </div>
 </body>
 </html>
+
+<script>
+    // Dark Mode Toggle
+    const toggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    
+    // Check saved preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+        toggle.textContent = '☀️';
+    }
+    
+    toggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+            toggle.textContent = '☀️';
+        } else {
+            localStorage.setItem('darkMode', 'disabled');
+            toggle.textContent = '🌙';
+        }
+    });
+</script>

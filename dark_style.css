@@ -1,0 +1,497 @@
+/* ======================================== */
+/* DARK MODE STYLES - Mood Melody           */
+/* ======================================== */
+
+/* ===== FIX: Prevent scrollbar shift ===== */
+html {
+    overflow-y: scroll;
+}
+
+/* ===== DARK MODE VARIABLES ===== */
+:root {
+    --dark-bg-primary: #0a0a1a;
+    --dark-bg-secondary: #12122a;
+    --dark-bg-card: #1a1a3e;
+    --dark-bg-hover: #25254a;
+    --dark-border: #2a2a5a;
+    --dark-text-primary: #e8e8f0;
+    --dark-text-secondary: #a8a8c0;
+    --dark-text-muted: #6a6a8a;
+    --dark-accent: #6d8cff;
+    --dark-accent-hover: #5a7aee;
+    --dark-gradient-start: #4a6cf7;
+    --dark-gradient-end: #7c3aed;
+    --dark-shadow: rgba(0, 0, 0, 0.6);
+    --dark-card-shadow: rgba(74, 108, 247, 0.1);
+}
+
+/* ===== APPLY DARK THEME ===== */
+body.dark-mode {
+    background: var(--dark-bg-primary);
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .container {
+    background: var(--dark-bg-secondary);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+/* ===== HEADER ===== */
+body.dark-mode .header-brand h1 {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .header-subtitle {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .header-divider {
+    background: linear-gradient(90deg, var(--dark-gradient-start), var(--dark-gradient-end));
+}
+
+/* ===== NAVIGATION ===== */
+body.dark-mode .main-nav {
+    border-bottom-color: var(--dark-border);
+}
+
+body.dark-mode .nav-link {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .nav-link:hover {
+    background: var(--dark-bg-hover);
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .nav-link.active {
+    background: var(--dark-accent);
+    color: #ffffff;
+}
+
+body.dark-mode .nav-link.active:hover {
+    background: var(--dark-accent-hover);
+}
+
+/* ===== QUESTION SECTION ===== */
+body.dark-mode .question-title {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .question-desc {
+    color: var(--dark-text-secondary);
+}
+
+/* ===== EMOTION CARDS ===== */
+body.dark-mode .emotion-card {
+    background: var(--dark-bg-card);
+    border-color: var(--dark-border);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body.dark-mode .emotion-card:hover {
+    background: var(--dark-bg-hover);
+    border-color: var(--dark-accent);
+    box-shadow: 0 8px 24px rgba(74, 108, 247, 0.15);
+}
+
+body.dark-mode .emotion-name {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .emotion-desc {
+    color: var(--dark-text-muted);
+}
+
+/* Emotion Card Color Variants - Dark Mode */
+body.dark-mode .emotion-happy { border-color: #fbbf24; }
+body.dark-mode .emotion-happy:hover { border-color: #f59e0b; box-shadow: 0 8px 24px rgba(251, 191, 36, 0.15); }
+
+body.dark-mode .emotion-sad { border-color: #60a5fa; }
+body.dark-mode .emotion-sad:hover { border-color: #3b82f6; box-shadow: 0 8px 24px rgba(96, 165, 250, 0.15); }
+
+body.dark-mode .emotion-energetic { border-color: #f87171; }
+body.dark-mode .emotion-energetic:hover { border-color: #ef4444; box-shadow: 0 8px 24px rgba(248, 113, 113, 0.15); }
+
+body.dark-mode .emotion-chill { border-color: #34d399; }
+body.dark-mode .emotion-chill:hover { border-color: #10b981; box-shadow: 0 8px 24px rgba(52, 211, 153, 0.15); }
+
+body.dark-mode .emotion-romantic { border-color: #f472b6; }
+body.dark-mode .emotion-romantic:hover { border-color: #ec4899; box-shadow: 0 8px 24px rgba(244, 114, 182, 0.15); }
+
+body.dark-mode .emotion-motivated { border-color: #a78bfa; }
+body.dark-mode .emotion-motivated:hover { border-color: #8b5cf6; box-shadow: 0 8px 24px rgba(167, 139, 250, 0.15); }
+
+body.dark-mode .emotion-nostalgic { border-color: #fb923c; }
+body.dark-mode .emotion-nostalgic:hover { border-color: #f97316; box-shadow: 0 8px 24px rgba(251, 146, 60, 0.15); }
+
+body.dark-mode .emotion-angry { border-color: #ef4444; }
+body.dark-mode .emotion-angry:hover { border-color: #dc2626; box-shadow: 0 8px 24px rgba(239, 68, 68, 0.15); }
+
+body.dark-mode .emotion-anxious { border-color: #818cf8; }
+body.dark-mode .emotion-anxious:hover { border-color: #6366f1; box-shadow: 0 8px 24px rgba(129, 140, 248, 0.15); }
+
+body.dark-mode .emotion-grateful { border-color: #6ee7b7; }
+body.dark-mode .emotion-grateful:hover { border-color: #34d399; box-shadow: 0 8px 24px rgba(110, 231, 183, 0.15); }
+
+/* ===== FOOTER ===== */
+body.dark-mode .footer-info {
+    border-top-color: var(--dark-border);
+}
+
+body.dark-mode .footer-text {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .footer-copyright {
+    color: var(--dark-text-muted);
+}
+
+/* ===== SONG ITEMS ===== */
+body.dark-mode .song-item {
+    background: var(--dark-bg-card);
+    border-color: var(--dark-border);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body.dark-mode .song-item:hover {
+    background: var(--dark-bg-hover);
+    border-color: var(--dark-accent);
+    box-shadow: 0 4px 16px rgba(74, 108, 247, 0.08);
+}
+
+body.dark-mode .song-number {
+    color: var(--dark-accent);
+}
+
+body.dark-mode .song-title-small {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .song-artist-small {
+    color: var(--dark-accent);
+}
+
+body.dark-mode .song-meta-small {
+    color: var(--dark-text-muted);
+}
+
+body.dark-mode .song-meta-small .dot {
+    color: var(--dark-border);
+}
+
+/* ===== MOOD OVERVIEW ===== */
+body.dark-mode .mood-overview {
+    background: var(--dark-bg-card);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .mood-title {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .mood-title .highlight {
+    color: var(--dark-accent);
+}
+
+body.dark-mode .meta-tag {
+    background: var(--dark-bg-secondary);
+    color: var(--dark-text-secondary);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .mood-description {
+    color: var(--dark-text-secondary);
+}
+
+/* ===== SEARCH SECTION ===== */
+body.dark-mode .search-wrapper {
+    background: var(--dark-bg-card);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .search-wrapper:focus-within {
+    border-color: var(--dark-accent);
+    box-shadow: 0 4px 20px rgba(74, 108, 247, 0.12);
+}
+
+body.dark-mode .search-input {
+    color: var(--dark-text-primary);
+    background: transparent;
+}
+
+body.dark-mode .search-input::placeholder {
+    color: var(--dark-text-muted);
+}
+
+body.dark-mode .btn-search {
+    background: var(--dark-accent);
+}
+
+body.dark-mode .btn-search:hover {
+    background: var(--dark-accent-hover);
+}
+
+body.dark-mode .suggestion-label {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .suggestion-tag {
+    background: var(--dark-bg-card);
+    color: var(--dark-accent);
+}
+
+body.dark-mode .suggestion-tag:hover {
+    background: var(--dark-accent);
+    color: #ffffff;
+}
+
+/* ===== RESULTS ===== */
+body.dark-mode .results-header {
+    border-bottom-color: var(--dark-border);
+}
+
+body.dark-mode .results-title {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .results-title strong {
+    color: var(--dark-accent);
+}
+
+body.dark-mode .back-link {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .back-link:hover {
+    color: var(--dark-accent);
+}
+
+body.dark-mode .mood-tag-small {
+    background: var(--dark-bg-secondary);
+    color: var(--dark-text-secondary);
+}
+
+/* ===== PLAYLIST STATS ===== */
+body.dark-mode .playlist-stats .stat-item {
+    background: var(--dark-bg-card);
+    border-color: var(--dark-border);
+    box-sizing: border-box;
+}
+
+body.dark-mode .playlist-stats .stat-number {
+    color: var(--dark-accent);
+}
+
+body.dark-mode .playlist-stats .stat-label {
+    color: var(--dark-text-secondary);
+}
+
+/* ===== BUTTONS ===== */
+body.dark-mode .btn-secondary {
+    background: var(--dark-bg-card);
+    color: var(--dark-text-primary);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: var(--dark-bg-hover);
+    border-color: var(--dark-text-muted);
+}
+
+body.dark-mode .btn-danger {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+body.dark-mode .btn-danger:hover {
+    background: #991b1b;
+}
+
+body.dark-mode .btn-playlist {
+    background: var(--dark-accent);
+}
+
+body.dark-mode .btn-playlist:hover {
+    background: var(--dark-accent-hover);
+}
+
+body.dark-mode .btn-remove {
+    background: var(--dark-bg-secondary);
+    color: #f87171;
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .btn-remove:hover {
+    background: #7f1d1d;
+    border-color: #ef4444;
+}
+
+body.dark-mode .btn-spotify {
+    background: #1DB954;
+}
+
+body.dark-mode .btn-spotify:hover {
+    background: #1ed760;
+}
+
+body.dark-mode .btn-warning {
+    background: #92400e;
+    color: #fbbf24;
+    border-color: #92400e;
+}
+
+body.dark-mode .btn-warning:hover {
+    background: #a16207;
+}
+
+/* ===== EMPTY PLAYLIST ===== */
+body.dark-mode .empty-playlist h3 {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .empty-playlist p {
+    color: var(--dark-text-secondary);
+}
+
+/* ===== NO RESULTS ===== */
+body.dark-mode .no-results {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .no-results h4 {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .no-results p {
+    color: var(--dark-text-muted);
+}
+
+/* ===== TOAST NOTIFICATIONS ===== */
+body.dark-mode #toast {
+    background: var(--dark-bg-card) !important;
+    color: var(--dark-text-primary) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== DARK MODE TOGGLE BUTTON ===== */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    color: #1a1a2e;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease, 
+                transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+}
+
+body.dark-mode .dark-mode-toggle {
+    background: var(--dark-accent);
+    border-color: var(--dark-accent);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(74, 108, 247, 0.4);
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* ===== RESPONSIVE DARK MODE ===== */
+@media (max-width: 640px) {
+    .dark-mode-toggle {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* ===== SCROLLBAR DARK MODE ===== */
+body.dark-mode::-webkit-scrollbar {
+    width: 10px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+    background: var(--dark-bg-primary);
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: var(--dark-bg-card);
+    border-radius: 5px;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-accent);
+}
+
+/* ===== SELECTION COLOR DARK MODE ===== */
+body.dark-mode ::selection {
+    background: var(--dark-accent);
+    color: #ffffff;
+}
+
+/* ===== INPUT FIELDS ===== */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background: var(--dark-bg-card);
+    color: var(--dark-text-primary);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    border-color: var(--dark-accent);
+    box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+}
+
+/* ===== SONG IMAGE CONTAINER ===== */
+body.dark-mode .song-image-container {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== CONSISTENT CONTAINER PADDING ===== */
+body.dark-mode .container {
+    padding: 48px 56px;
+}
+
+@media (max-width: 640px) {
+    body.dark-mode .container {
+        padding: 24px 18px;
+    }
+}
+
+/* ===== SAFE TRANSITIONS - No layout shift ===== */
+body.dark-mode,
+body.dark-mode .container,
+body.dark-mode .emotion-card,
+body.dark-mode .song-item,
+body.dark-mode .mood-overview,
+body.dark-mode .search-wrapper,
+body.dark-mode .playlist-stats .stat-item,
+body.dark-mode .dark-mode-toggle {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease,
+                opacity 0.3s ease;
+}
