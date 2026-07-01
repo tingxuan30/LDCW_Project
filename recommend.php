@@ -99,9 +99,9 @@ $songs = $recommendationData['songs'];
                         $imagePath = isset($song['image']) ? $song['image'] : 'image/default-album.jpg';
                         ?>
                         <img src="<?php echo htmlspecialchars($imagePath); ?>" 
-                             alt="<?php echo htmlspecialchars($song['title']); ?> album art" 
-                             class="song-album-image"
-                             onerror="this.src='image/default-album.jpg'">
+                            alt="<?php echo htmlspecialchars($song['title']); ?> album art" 
+                            class="song-album-image"
+                            onerror="this.src='image/default-album.jpg'">
                     </div>
                     <div class="song-info">
                         <h3 class="song-title-small"><?php echo htmlspecialchars($song['title']); ?></h3>
@@ -110,6 +110,25 @@ $songs = $recommendationData['songs'];
                             <span><?php echo $song['year']; ?></span>
                             <span class="dot">·</span>
                             <span><?php echo $song['tempo']; ?></span>
+                            <span class="dot">·</span>
+                            <span class="mood-tag-small">
+                                <?php 
+                                $moodEmojis = [
+                                    'happy' => '😊',
+                                    'sad' => '😢',
+                                    'energetic' => '⚡',
+                                    'chill' => '😌',
+                                    'romantic' => '❤️',
+                                    'motivated' => '💪',
+                                    'nostalgic' => '🕰️',
+                                    'angry' => '😤',
+                                    'anxious' => '😰',
+                                    'grateful' => '🙏'
+                                ];
+                                $emoji = $moodEmojis[$emotion] ?? '🎵';
+                                echo $emoji . ' ' . $mood; 
+                                ?>
+                            </span>
                         </div>
                     </div>
                     <div class="action-buttons-group">

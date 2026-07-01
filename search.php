@@ -106,67 +106,85 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['q']) && !empty($_GET['q'
 
         <!-- Search Results -->
         <?php if (!empty($searchQuery)): ?>
-        <div class="results-section">
-            <div class="results-header">
-                <h2 class="results-title">
-                    <?php if (count($searchResults) > 0): ?>
-                        Found <?php echo count($searchResults); ?> song(s) matching "<strong><?php echo htmlspecialchars($searchQuery); ?></strong>"
-                    <?php else: ?>
-                        No songs found for "<strong><?php echo htmlspecialchars($searchQuery); ?></strong>"
-                    <?php endif; ?>
-                </h2>
-                <a href="index.php" class="back-link">← Back to Home</a>
-            </div>
+            <div class="results-section">
+                <div class="results-header">
+                    <h2 class="results-title">
+                        <?php if (count($searchResults) > 0): ?>
+                            Found <?php echo count($searchResults); ?> song(s) matching "<strong><?php echo htmlspecialchars($searchQuery); ?></strong>"
+                        <?php else: ?>
+                            No songs found for "<strong><?php echo htmlspecialchars($searchQuery); ?></strong>"
+                        <?php endif; ?>
+                    </h2>
+                    <a href="index.php" class="back-link">← Back to Home</a>
+                </div>
 
-            <?php if (count($searchResults) > 0): ?>
-            <div class="search-results-list">
-                <?php foreach ($searchResults as $index => $song): ?>
-                <div class="song-item search-item">
-                    <div class="song-number"><?php echo $index + 1; ?></div>
-                
-                    <div class="song-image-container">
-                        <?php 
-                        $imagePath = isset($song['image']) ? $song['image'] : 'image/default-album.jpg';
-                        ?>
-                        <img src="<?php echo htmlspecialchars($imagePath); ?>" 
-                             alt="<?php echo htmlspecialchars($song['title']); ?> album art" 
-                             class="song-album-image"
-                             onerror="this.src='image/default-album.jpg'">
-                    </div>
+                <?php if (count($searchResults) > 0): ?>
+                <div class="search-results-list">
+                    <?php foreach ($searchResults as $index => $song): ?>
+                    <div class="song-item search-item">
+                        <div class="song-number"><?php echo $index + 1; ?></div>
                     
-                    <div class="song-info">
-                        <h3 class="song-title-small"><?php echo htmlspecialchars($song['title']); ?></h3>
-                        <p class="song-artist-small"><?php echo htmlspecialchars($song['artist']); ?></p>
-                        <div class="song-meta-small">
-                            <span><?php echo $song['year']; ?></span>
-                            <span class="dot">·</span>
-                            <span><?php echo $song['tempo']; ?></span>
-                            <span class="dot">·</span>
-                            <span class="mood-tag-small">🎵 <?php echo ucfirst($song['mood']); ?></span>
+                        <div class="song-image-container">
+                            <?php 
+                            $imagePath = isset($song['image']) ? $song['image'] : 'image/default-album.jpg';
+                            ?>
+                            <img src="<?php echo htmlspecialchars($imagePath); ?>" 
+                                alt="<?php echo htmlspecialchars($song['title']); ?> album art" 
+                                class="song-album-image"
+                                onerror="this.src='image/default-album.jpg'">
+                        </div>
+                        
+                        <div class="song-info">
+                            <h3 class="song-title-small"><?php echo htmlspecialchars($song['title']); ?></h3>
+                            <p class="song-artist-small"><?php echo htmlspecialchars($song['artist']); ?></p>
+                            <div class="song-meta-small">
+                                <span><?php echo $song['year']; ?></span>
+                                <span class="dot">·</span>
+                                <span><?php echo $song['tempo']; ?></span>
+                                <span class="dot">·</span>
+                                <span class="mood-tag-small">
+                                    <?php 
+                                    // Get emoji for this mood
+                                    $moodEmojis = [
+                                        'happy' => '😊',
+                                        'sad' => '😢',
+                                        'energetic' => '⚡',
+                                        'chill' => '😌',
+                                        'romantic' => '❤️',
+                                        'motivated' => '💪',
+                                        'nostalgic' => '🕰️',
+                                        'angry' => '😤',
+                                        'anxious' => '😰',
+                                        'grateful' => '🙏'
+                                    ];
+                                    $emoji = $moodEmojis[$song['mood']] ?? '🎵';
+                                    echo $emoji . ' ' . ucfirst($song['mood']); 
+                                    ?>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="action-buttons-group">
+                            <a href="<?php echo $song['spotify']; ?>" target="_blank" class="btn btn-small btn-spotify">
+                                ▶ Play
+                            </a>
+                            <button onclick="addToPlaylist(
+                                    '<?php echo htmlspecialchars($song['title']); ?>', 
+                                    '<?php echo htmlspecialchars($song['artist']); ?>', 
+                                    '<?php echo $song['spotify']; ?>', 
+                                    '<?php echo isset($song['image']) ? $song['image'] : 'image/default-album.jpg'; ?>',
+                                    '<?php echo $song['year'] ?? ''; ?>',
+                                    '<?php echo $song['tempo'] ?? ''; ?>'
+                                )" 
+                                class="btn btn-small btn-playlist">
+                                Add to Playlist
+                            </button>
                         </div>
                     </div>
-                    <div class="action-buttons-group">
-                        <a href="<?php echo $song['spotify']; ?>" target="_blank" class="btn btn-small btn-spotify">
-                            ▶ Play
-                        </a>
-                        <button onclick="addToPlaylist(
-                                '<?php echo htmlspecialchars($song['title']); ?>', 
-                                '<?php echo htmlspecialchars($song['artist']); ?>', 
-                                '<?php echo $song['spotify']; ?>', 
-                                '<?php echo isset($song['image']) ? $song['image'] : 'image/default-album.jpg'; ?>',
-                                '<?php echo $song['year'] ?? ''; ?>',
-                                '<?php echo $song['tempo'] ?? ''; ?>'
-                            )" 
-                            class="btn btn-small btn-playlist">
-                            Add to Playlist
-                        </button>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-                <?php endforeach; ?>
+                <?php endif; ?>
             </div>
             <?php endif; ?>
-        </div>
-        <?php endif; ?>
 
         <!-- Footer -->
         <div class="footer-info">

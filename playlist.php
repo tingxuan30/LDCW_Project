@@ -234,7 +234,7 @@ function getMoodColor($mood) {
                 <a href="index.php" class="btn btn-secondary">← Add More Songs</a>
             </div>
             <div class="playlist-actions-right">
-                <button onclick="shufflePlaylist()" class="btn btn-warning">🔀 Shuffle</button>
+                <button onclick="shufflePlaylist()" class="btn btn-warning">⇄ Shuffle</button>
                 <button onclick="clearPlaylist()" class="btn btn-danger">🗑️ Clear Playlist</button>
             </div>
         </div>
@@ -259,18 +259,49 @@ function getMoodColor($mood) {
                     <h3 class="song-title-small"><?php echo htmlspecialchars($song['title']); ?></h3>
                     <p class="song-artist-small"><?php echo htmlspecialchars($song['artist']); ?></p>
                     <?php if (isset($song['year']) || isset($song['tempo'])): ?>
-                    <div class="song-meta-small">
-                        <?php if (isset($song['year'])): ?>
-                        <span><?php echo $song['year']; ?></span>
+                        <div class="song-meta-small">
+                            <?php if (isset($song['year'])): ?>
+                            <span><?php echo $song['year']; ?></span>
+                            <?php endif; ?>
+                            <?php if (isset($song['tempo'])): ?>
+                            <?php if (isset($song['year'])): ?>
+                            <span class="dot">·</span>
+                            <?php endif; ?>
+                            <span><?php echo $song['tempo']; ?></span>
+                            <?php endif; ?>
+                            <span class="dot">·</span>
+                            <span class="mood-tag-small">
+                                <?php 
+                                // Find the mood for this song
+                                require_once 'song_database.php';
+                                $allSongs = getAllSongs();
+                                $songMood = '';
+                                foreach ($allSongs as $mood => $data) {
+                                    foreach ($data['songs'] as $dbSong) {
+                                        if ($dbSong['title'] === $song['title'] && $dbSong['artist'] === $song['artist']) {
+                                            $songMood = $mood;
+                                            break 2;
+                                        }
+                                    }
+                                }
+                                $moodEmojis = [
+                                    'happy' => '😊',
+                                    'sad' => '😢',
+                                    'energetic' => '⚡',
+                                    'chill' => '😌',
+                                    'romantic' => '❤️',
+                                    'motivated' => '💪',
+                                    'nostalgic' => '🕰️',
+                                    'angry' => '😤',
+                                    'anxious' => '😰',
+                                    'grateful' => '🙏'
+                                ];
+                                $emoji = $moodEmojis[$songMood] ?? '🎵';
+                                echo $emoji . ' ' . ucfirst($songMood); 
+                                ?>
+                            </span>
+                        </div>
                         <?php endif; ?>
-                        <?php if (isset($song['tempo'])): ?>
-                        <?php if (isset($song['year'])): ?>
-                        <span class="dot">·</span>
-                        <?php endif; ?>
-                        <span><?php echo $song['tempo']; ?></span>
-                        <?php endif; ?>
-                    </div>
-                    <?php endif; ?>
                 </div>
                 <div class="action-buttons-group">
                     <a href="<?php echo $song['spotify']; ?>" target="_blank" class="btn btn-small btn-spotify">
