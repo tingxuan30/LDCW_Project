@@ -10,6 +10,17 @@ if (!isset($_SESSION['playlist'])) {
 header('Content-Type: application/json');
 
 // ============================================
+// GET REQUEST - Get playlist data
+// ============================================
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['action']) && $_GET['action'] == 'get_playlist') {
+    echo json_encode([
+        'success' => true,
+        'playlist' => $_SESSION['playlist']
+    ]);
+    exit;
+}
+
+// ============================================
 // GET REQUEST - Get playlist count
 // ============================================
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['action']) && $_GET['action'] == 'get_count') {

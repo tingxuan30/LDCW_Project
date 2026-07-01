@@ -1,6 +1,9 @@
 <?php
 session_start();
 $current_page = 'home';
+
+// Get current playlist for JavaScript (to avoid recommending duplicate songs)
+$playlistData = isset($_SESSION['playlist']) ? $_SESSION['playlist'] : [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +55,7 @@ $current_page = 'home';
             color: rgba(255, 255, 255, 0.8);
         }
 
+        /* Modal Album Image */
         .modal-song-image {
             width: 120px;
             height: 120px;
@@ -68,7 +72,6 @@ $current_page = 'home';
             display: block;
         }
 
-        /* Dark mode adjustment */
         body.dark-mode .modal-song-image {
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
         }
@@ -80,9 +83,7 @@ $current_page = 'home';
             }
         }
         
-        /* ============================================
-           MODAL STYLES
-        ============================================ */
+        /* MODAL STYLES */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -138,6 +139,10 @@ $current_page = 'home';
             color: #a8a8c0;
         }
         
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+        
         .modal-title {
             font-size: 1.8rem;
             font-weight: 700;
@@ -171,12 +176,6 @@ $current_page = 'home';
         body.dark-mode .modal-song {
             background: #12122a;
             border-color: #2a2a5a;
-        }
-        
-        .modal-song .song-emoji {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 8px;
         }
         
         .modal-song .song-title {
@@ -226,7 +225,7 @@ $current_page = 'home';
             flex: 1;
             justify-content: center;
             min-width: 120px;
-            margin-bottom: 15px;
+            margin-bottom: 0;
         }
         
         /* Give It A Try button */
@@ -394,10 +393,12 @@ $current_page = 'home';
                         <span class="emotion-desc">Appreciative & Thankful</span>
                     </button>
                 </div>
-                    <button type="button" onclick="showSurprise()" class="emotion-card emotion-uncertain">
-                        <span class="emotion-name">🎲 I'm uncertain for today... Surprise me!</span>
-                        <span class="emotion-desc">Get a random song recommendation</span>
-                    </button>
+                
+                <!-- Surprise Me Button -->
+                <button type="button" onclick="showSurprise()" class="emotion-card emotion-uncertain">
+                    <span class="emotion-name">🎲 I'm not sure for today... Surprise me!</span>
+                    <span class="emotion-desc">Get a random song recommendation</span>
+                </button>
             </form>
 
             <!-- Footer Information -->
@@ -407,206 +408,238 @@ $current_page = 'home';
             </div>
         </main>
     </div>
-</body>
-</html>
 
-<script>
-    // Dark Mode Toggle
-    const toggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-    
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-        toggle.textContent = '☀️';
-    }
-    
-    toggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('darkMode', 'enabled');
+    <script>
+        // ============================================
+        // DARK MODE TOGGLE
+        // ============================================
+        const toggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
             toggle.textContent = '☀️';
-        } else {
-            localStorage.setItem('darkMode', 'disabled');
-            toggle.textContent = '🌙';
         }
-    });
-
-    // ============================================
-    // RANDOMLY SUGGEST A SONG FUNCTIONALITY
-    // ============================================
-    const allSongsData = <?php 
-        require_once 'song_database.php';
-        $allSongs = getAllSongs();
-        $flatSongs = [];
-        foreach ($allSongs as $mood => $data) {
-            foreach ($data['songs'] as $song) {
-                $song['mood_key'] = $mood;
-                $flatSongs[] = $song;
+        
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                toggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                toggle.textContent = '🌙';
             }
-        }
-        echo json_encode($flatSongs);
-    ?>;
-    
-    const moodEmojis = {
-        'happy': '😊',
-        'sad': '😢',
-        'energetic': '⚡',
-        'chill': '😌',
-        'romantic': '❤️',
-        'motivated': '💪',
-        'nostalgic': '🕰️',
-        'angry': '😤',
-        'anxious': '😰',
-        'grateful': '🙏'
-    };
+        });
 
-    function showSurprise() {
-        if (allSongsData.length === 0) {
-            showToast('No songs available!', 'error');
-            return;
-        }
+        // ============================================
+        // SURPRISE ME! FUNCTIONALITY
+        // ============================================
         
-        const randomIndex = Math.floor(Math.random() * allSongsData.length);
-        const song = allSongsData[randomIndex];
-        const emoji = moodEmojis[song.mood_key] || '🎵';
-        const imagePath = song.image || 'image/default-album.jpg';
-        
-        const modalContent = document.getElementById('modalSongContent');
-        modalContent.innerHTML = `
-            <div class="modal-song">
-                <div class="modal-song-image">
-                    <img src="${imagePath}" 
-                        alt="${song.title} album art" 
-                        class="modal-album-image"
-                        onerror="this.src='image/default-album.jpg'">
-                </div>
-                <div class="song-title">${song.title}</div>
-                <div class="song-artist">${song.artist}</div>
-                <div class="song-meta">${song.year} · ${song.tempo}</div>
-                <div class="song-mood-tag">${emoji} ${song.mood_key.charAt(0).toUpperCase() + song.mood_key.slice(1)}</div>
-            </div>
-        `;
-        
-        // Set the "Give It A Try" button
-        const playBtn = document.getElementById('modalPlayBtn');
-        playBtn.href = song.spotify || '#';
-        playBtn.target = '_blank';
-        
-        // Set the "Add to Playlist" button
-        const playlistBtn = document.getElementById('modalPlaylistBtn');
-        playlistBtn.onclick = function(e) {
-            e.preventDefault();
-            addToPlaylistFromModal(song);
-        };
-        
-        document.getElementById('surpriseModal').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeSurprise() {
-        document.getElementById('surpriseModal').classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    function addToPlaylistFromModal(song) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'playlist_data.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-            if (this.status === 200) {
-                try {
-                    const response = JSON.parse(this.responseText);
-                    if (response.success) {
-                        showToast('✅ "' + song.title + '" added to your playlist!', 'success');
-                        updatePlaylistCount();
-                        setTimeout(closeSurprise, 800);
-                    } else {
-                        showToast('⚠️ ' + response.message, 'warning');
-                    }
-                } catch(e) {
-                    console.error('Error parsing response:', e);
+        // All songs data from database
+        const allSongsData = <?php 
+            require_once 'song_database.php';
+            $allSongs = getAllSongs();
+            $flatSongs = [];
+            foreach ($allSongs as $mood => $data) {
+                foreach ($data['songs'] as $song) {
+                    $song['mood_key'] = $mood;
+                    $flatSongs[] = $song;
                 }
             }
+            echo json_encode($flatSongs);
+        ?>;
+        
+        // Current playlist from PHP (for excluding existing songs)
+        const currentPlaylist = <?php echo json_encode($playlistData); ?>;
+        
+        const moodEmojis = {
+            'happy': '😊',
+            'sad': '😢',
+            'energetic': '⚡',
+            'chill': '😌',
+            'romantic': '❤️',
+            'motivated': '💪',
+            'nostalgic': '🕰️',
+            'angry': '😤',
+            'anxious': '😰',
+            'grateful': '🙏'
         };
-        xhr.send('action=add&title=' + encodeURIComponent(song.title) + 
-                '&artist=' + encodeURIComponent(song.artist) + 
-                '&spotify=' + encodeURIComponent(song.spotify) +
-                '&image=' + encodeURIComponent(song.image || 'image/default-album.jpg') +
-                '&year=' + encodeURIComponent(song.year || '') +
-                '&tempo=' + encodeURIComponent(song.tempo || ''));
-    }
 
-    // ============================================
-    // TOAST NOTIFICATIONS
-    // ============================================
-    function showToast(message, type = 'info') {
-        let toast = document.getElementById('toast');
-        if (!toast) {
-            toast = document.createElement('div');
-            toast.id = 'toast';
-            toast.style.cssText = `
-                position: fixed;
-                bottom: 30px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: #333;
-                color: #fff;
-                padding: 16px 24px;
-                border-radius: 8px;
-                z-index: 1001;
-                opacity: 0;
-                transition: opacity 0.5s ease;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                font-size: 1rem;
-                max-width: 90%;
-                font-family: 'Inter', sans-serif;
+        function showSurprise() {
+            if (allSongsData.length === 0) {
+                showToast('No songs available!', 'error');
+                return;
+            }
+            
+            // Create a set of songs already in playlist
+            const playlistKeys = new Set();
+            currentPlaylist.forEach(song => {
+                playlistKeys.add(song.title + '|' + song.artist);
+            });
+            
+            // Filter out songs already in playlist
+            const availableSongs = allSongsData.filter(song => {
+                const key = song.title + '|' + song.artist;
+                return !playlistKeys.has(key);
+            });
+            
+            // Check if there are any songs left
+            if (availableSongs.length === 0) {
+                showToast('🎉 You\'ve added all songs to your playlist!', 'info');
+                return;
+            }
+            
+            // Pick a random song from available songs
+            const randomIndex = Math.floor(Math.random() * availableSongs.length);
+            const song = availableSongs[randomIndex];
+            const emoji = moodEmojis[song.mood_key] || '🎵';
+            const imagePath = song.image || 'image/default-album.jpg';
+            
+            // Build modal content with album art
+            const modalContent = document.getElementById('modalSongContent');
+            modalContent.innerHTML = `
+                <div class="modal-song">
+                    <div class="modal-song-image">
+                        <img src="${imagePath}" 
+                            alt="${song.title} album art" 
+                            class="modal-album-image"
+                            onerror="this.src='image/default-album.jpg'">
+                    </div>
+                    <div class="song-title">${song.title}</div>
+                    <div class="song-artist">${song.artist}</div>
+                    <div class="song-meta">${song.year} · ${song.tempo}</div>
+                    <div class="song-mood-tag">${emoji} ${song.mood_key.charAt(0).toUpperCase() + song.mood_key.slice(1)}</div>
+                </div>
             `;
-            document.body.appendChild(toast);
+            
+            // Set the "Give It A Try" button (Spotify link)
+            const playBtn = document.getElementById('modalPlayBtn');
+            playBtn.href = song.spotify || '#';
+            playBtn.target = '_blank';
+            
+            // Set the "Add to Playlist" button
+            const playlistBtn = document.getElementById('modalPlaylistBtn');
+            playlistBtn.onclick = function(e) {
+                e.preventDefault();
+                addToPlaylistFromModal(song);
+            };
+            
+            // Show the modal
+            document.getElementById('surpriseModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
-        const colors = {
-            success: '#1DB954',
-            error: '#dc3545',
-            warning: '#f0ad4e',
-            info: '#4a6cf7'
-        };
-        toast.style.background = colors[type] || '#333';
-        toast.textContent = message;
-        toast.style.opacity = '1';
+        function closeSurprise() {
+            document.getElementById('surpriseModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
-        setTimeout(() => {
-            toast.style.opacity = '0';
-        }, 3000);
-    }
-
-    // ============================================
-    // UPDATE PLAYLIST COUNT
-    // ============================================
-    function updatePlaylistCount() {
-        const playlistLink = document.querySelector('.nav-link[href*="playlist.php"]');
-        if (playlistLink) {
-            fetch('playlist_data.php?action=get_count')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        const count = data.count;
-                        if (count > 0) {
-                            playlistLink.textContent = 'Playlist (' + count + ')';
+        function addToPlaylistFromModal(song) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'playlist_data.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    try {
+                        const response = JSON.parse(this.responseText);
+                        if (response.success) {
+                            showToast('✅ "' + song.title + '" added to your playlist!', 'success');
+                            // Update playlist count in navigation
+                            updatePlaylistCount();
+                            // Add to currentPlaylist so it won't show again
+                            currentPlaylist.push(song);
+                            // Close modal after a moment
+                            setTimeout(closeSurprise, 800);
                         } else {
-                            playlistLink.textContent = 'Playlist';
+                            showToast('⚠️ ' + response.message, 'warning');
                         }
+                    } catch(e) {
+                        console.error('Error parsing response:', e);
                     }
-                })
-                .catch(() => console.log('Could not update playlist count'));
+                }
+            };
+            xhr.send('action=add&title=' + encodeURIComponent(song.title) + 
+                    '&artist=' + encodeURIComponent(song.artist) + 
+                    '&spotify=' + encodeURIComponent(song.spotify) +
+                    '&image=' + encodeURIComponent(song.image || 'image/default-album.jpg') +
+                    '&year=' + encodeURIComponent(song.year || '') +
+                    '&tempo=' + encodeURIComponent(song.tempo || ''));
         }
-    }
 
-    // ============================================
-    // CLOSE MODAL ON OVERLAY CLICK
-    // ============================================
-    document.getElementById('surpriseModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeSurprise();
+        // ============================================
+        // TOAST NOTIFICATIONS
+        // ============================================
+        function showToast(message, type = 'info') {
+            let toast = document.getElementById('toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #333;
+                    color: #fff;
+                    padding: 16px 24px;
+                    border-radius: 8px;
+                    z-index: 1001;
+                    opacity: 0;
+                    transition: opacity 0.5s ease;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    font-size: 1rem;
+                    max-width: 90%;
+                    font-family: 'Inter', sans-serif;
+                `;
+                document.body.appendChild(toast);
+            }
+
+            const colors = {
+                success: '#1DB954',
+                error: '#dc3545',
+                warning: '#f0ad4e',
+                info: '#4a6cf7'
+            };
+            toast.style.background = colors[type] || '#333';
+            toast.textContent = message;
+            toast.style.opacity = '1';
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 3000);
         }
-    });
-</script>
+
+        // ============================================
+        // UPDATE PLAYLIST COUNT IN NAVIGATION
+        // ============================================
+        function updatePlaylistCount() {
+            const playlistLink = document.querySelector('.nav-link[href*="playlist.php"]');
+            if (playlistLink) {
+                fetch('playlist_data.php?action=get_count')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const count = data.count;
+                            if (count > 0) {
+                                playlistLink.textContent = 'Playlist (' + count + ')';
+                            } else {
+                                playlistLink.textContent = 'Playlist';
+                            }
+                        }
+                    })
+                    .catch(() => console.log('Could not update playlist count'));
+            }
+        }
+
+        // ============================================
+        // CLOSE MODAL ON OVERLAY CLICK
+        // ============================================
+        document.getElementById('surpriseModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSurprise();
+            }
+        });
+    </script>
+</body>
+</html>
