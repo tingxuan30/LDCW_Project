@@ -9,6 +9,20 @@ if (!isset($_SESSION['playlist'])) {
 // Set JSON header
 header('Content-Type: application/json');
 
+// ============================================
+// GET REQUEST - Get playlist count
+// ============================================
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['action']) && $_GET['action'] == 'get_count') {
+    echo json_encode([
+        'success' => true, 
+        'count' => count($_SESSION['playlist'])
+    ]);
+    exit;
+}
+
+// ============================================
+// POST REQUESTS - Add, Remove, Clear, Shuffle
+// ============================================
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
     $action = $_POST['action'];
     
@@ -58,7 +72,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
             }
             
             $_SESSION['playlist'][] = $songData;
-            echo json_encode(['success' => true, 'message' => 'Song added to playlist']);
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Song added to playlist',
+                'count' => count($_SESSION['playlist'])
+            ]);
             break;
             
         case 'clear':

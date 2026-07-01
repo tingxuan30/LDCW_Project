@@ -223,7 +223,7 @@ function getMoodColor($mood) {
                 <input type="text" 
                     id="searchInput" 
                     class="search-input search-input-full" 
-                    placeholder="🔍 Search songs in your playlist..." 
+                    placeholder="🔍︎ Search songs in your playlist..." 
                     onkeyup="filterPlaylist()">
             </div>
         </div>
@@ -317,7 +317,7 @@ function getMoodColor($mood) {
 
         <!-- No Search Results Message -->
         <div id="noResults" class="no-results" style="display: none;">
-            <div class="icon">🔍</div>
+            <div class="icon">🗁</div>
             <h4>No songs found</h4>
             <p>Try searching with different keywords</p>
         </div>
@@ -332,7 +332,7 @@ function getMoodColor($mood) {
             </p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
                 <a href="index.php" class="btn btn-primary">🎵 Get Recommendations</a>
-                <a href="search.php" class="btn btn-secondary">🔍 Search Songs</a>
+                <a href="search.php" class="btn btn-secondary">🔍︎ Search Songs</a>
             </div>
         </div>
         <?php endif; ?>
