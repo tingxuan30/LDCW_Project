@@ -170,7 +170,7 @@ $moodEmojis = [
                                     '<?php echo $song['tempo'] ?? ''; ?>'
                                 )" 
                                 class="btn btn-small btn-playlist">
-                            Add to Playlist
+                            ✚ Add to Playlist
                         </button>
                     </div>
                 </div>
