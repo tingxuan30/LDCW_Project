@@ -8,6 +8,73 @@ if (!isset($_SESSION['playlist'])) {
 }
 
 $playlist = $_SESSION['playlist'];
+
+// ============================================
+// CALCULATE DOMINANT MOOD
+// ============================================
+function getDominantMood($playlist) {
+    if (empty($playlist)) {
+        return null;
+    }
+    
+    // Load song database
+    require_once 'song_database.php';
+    $allSongs = getAllSongs();
+    
+    // Count moods in playlist
+    $moodCounts = [];
+    foreach ($playlist as $song) {
+        foreach ($allSongs as $mood => $data) {
+            foreach ($data['songs'] as $dbSong) {
+                if ($dbSong['title'] === $song['title'] && $dbSong['artist'] === $song['artist']) {
+                    $moodCounts[$mood] = ($moodCounts[$mood] ?? 0) + 1;
+                    break 2;
+                }
+            }
+        }
+    }
+    
+    // Find the dominant mood
+    if (empty($moodCounts)) {
+        return null;
+    }
+    
+    arsort($moodCounts);
+    $dominantMood = key($moodCounts);
+    $count = current($moodCounts);
+    $total = count($playlist);
+    $percentage = round(($count / $total) * 100);
+    
+    return [
+        'mood' => $dominantMood,
+        'count' => $count,
+        'total' => $total,
+        'percentage' => $percentage,
+        'label' => ucfirst($dominantMood)
+    ];
+}
+
+$dominantMoodData = getDominantMood($playlist);
+
+// ============================================
+// MOOD COLOR MAPPING
+// ============================================
+function getMoodColor($mood) {
+    $colors = [
+        'happy' => ['bg' => '#fbbf24', 'border' => '#f59e0b', 'text' => '#92400e', 'glow' => 'rgba(251, 191, 36, 0.3)'],
+        'sad' => ['bg' => '#60a5fa', 'border' => '#3b82f6', 'text' => '#1e3a8a', 'glow' => 'rgba(96, 165, 250, 0.3)'],
+        'energetic' => ['bg' => '#f87171', 'border' => '#ef4444', 'text' => '#7f1d1d', 'glow' => 'rgba(248, 113, 113, 0.3)'],
+        'chill' => ['bg' => '#34d399', 'border' => '#10b981', 'text' => '#065f46', 'glow' => 'rgba(52, 211, 153, 0.3)'],
+        'romantic' => ['bg' => '#f472b6', 'border' => '#ec4899', 'text' => '#831843', 'glow' => 'rgba(244, 114, 182, 0.3)'],
+        'motivated' => ['bg' => '#a78bfa', 'border' => '#8b5cf6', 'text' => '#4c1d95', 'glow' => 'rgba(167, 139, 250, 0.3)'],
+        'nostalgic' => ['bg' => '#fb923c', 'border' => '#f97316', 'text' => '#7c2d12', 'glow' => 'rgba(251, 146, 60, 0.3)'],
+        'angry' => ['bg' => '#ef4444', 'border' => '#dc2626', 'text' => '#7f1d1d', 'glow' => 'rgba(239, 68, 68, 0.3)'],
+        'anxious' => ['bg' => '#818cf8', 'border' => '#6366f1', 'text' => '#312e81', 'glow' => 'rgba(129, 140, 248, 0.3)'],
+        'grateful' => ['bg' => '#6ee7b7', 'border' => '#34d399', 'text' => '#065f46', 'glow' => 'rgba(110, 231, 183, 0.3)']
+    ];
+    
+    return $colors[$mood] ?? ['bg' => '#888', 'border' => '#666', 'text' => '#fff', 'glow' => 'rgba(136, 136, 136, 0.3)'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +85,63 @@ $playlist = $_SESSION['playlist'];
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dark_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Mood stat item styling */
+        .stat-item.mood-stat {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item.mood-stat .mood-emoji {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .stat-item.mood-stat .mood-label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .stat-item.mood-stat .mood-sub {
+            font-size: 0.75rem;
+            font-weight: 500;
+            opacity: 0.8;
+            display: block;
+            margin-top: 2px;
+        }
+        
+        .stat-item.mood-stat .mood-percentage {
+            position: absolute;
+            bottom: 6px;
+            right: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            opacity: 0.5;
+        }
+        
+        .stat-item.mood-stat .mood-glow {
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        /* Dark mode adjustments */
+        body.dark-mode .stat-item.mood-stat .mood-label {
+            color: #ffffff;
+        }
+        
+        body.dark-mode .stat-item.mood-stat .mood-sub {
+            color: #e8e8f0;
+        }
+    </style>
 </head>
 <body>
     <!-- Dark Mode Toggle - MOVED OUTSIDE container for proper fixed positioning -->
@@ -32,7 +156,7 @@ $playlist = $_SESSION['playlist'];
                 <span class="brand-icon">♪</span>
                 <h1>Mood Melody</h1>
             </div>
-            <p class="header-subtitle">Your Personal Playlist</p>
+            <p class="header-subtitle">Keep Every Song You Love in One Place</p>
             <div class="header-divider"></div>
 
             <nav class="main-nav">
@@ -48,12 +172,46 @@ $playlist = $_SESSION['playlist'];
         <div class="playlist-stats">
             <div class="stat-item">
                 <span class="stat-number"><?php echo count($playlist); ?></span>
-                <span class="stat-label">Songs in Playlist</span>
+                <span class="stat-label">Song(s) in Playlist</span>
             </div>
-            <div class="stat-item">
-                <span class="stat-number">🎵</span>
-                <span class="stat-label">Curated Just for You</span>
-            </div>
+            
+            <?php if ($dominantMoodData && count($playlist) > 0): ?>
+                <?php 
+                $mood = $dominantMoodData['mood'];
+                $color = getMoodColor($mood);
+                $moodEmojis = [
+                    'happy' => '😊',
+                    'sad' => '😢',
+                    'energetic' => '⚡',
+                    'chill' => '😌',
+                    'romantic' => '❤️',
+                    'motivated' => '💪',
+                    'nostalgic' => '🕰️',
+                    'angry' => '😤',
+                    'anxious' => '😰',
+                    'grateful' => '🙏'
+                ];
+                $emoji = $moodEmojis[$mood] ?? '🎵';
+                ?>
+                <div class="stat-item mood-stat" style="border-color: <?php echo $color['border']; ?>; background: <?php echo $color['bg']; ?>20;">
+                    <div class="mood-glow" style="background: <?php echo $color['bg']; ?>;"></div>
+                    <span class="mood-emoji"><?php echo $emoji; ?></span>
+                    <span class="mood-label" style="color: <?php echo $color['text']; ?>;">
+                        <?php echo ucfirst($mood); ?>
+                    </span>
+                    <span class="mood-sub" style="color: <?php echo $color['text']; ?>;">
+                        is your dominant energy
+                    </span>
+                    <span class="mood-percentage" style="color: <?php echo $color['text']; ?>;">
+                        <?php echo $dominantMoodData['percentage']; ?>% of playlist
+                    </span>
+                </div>
+            <?php else: ?>
+                <div class="stat-item">
+                    <span class="stat-number">🎵</span>
+                    <span class="stat-label">Add songs to discover<br>your dominant mood</span>
+                </div>
+            <?php endif; ?>
         </div>
 
         <!-- Playlist Content -->
@@ -136,9 +294,9 @@ $playlist = $_SESSION['playlist'];
         <?php else: ?>
         <!-- Empty Playlist -->
         <div class="empty-playlist" style="text-align: center; padding: 60px 20px;">
-            <div style="font-size: 5rem; margin-bottom: 20px;">🎶</div>
-            <h3 style="color: #fff; margin-bottom: 10px;">Your playlist is empty</h3>
-            <p style="color: #888; margin-bottom: 10px; max-width: 400px; margin-left: auto; margin-right: auto;">
+            <div style="font-size: 5rem; margin-bottom: 20px;">🗁</div>
+            <h3 style="color: #6b7280; margin-bottom: 10px;">Your playlist is empty</h3>
+            <p style="color: #6b7280; margin-bottom: 10px; max-width: 400px; margin-left: auto; margin-right: auto;">
                 Start building your playlist by searching for songs or getting recommendations.
             </p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">

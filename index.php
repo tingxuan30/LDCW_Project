@@ -22,8 +22,8 @@ $current_page = 'home';
         <!-- Header -->
         <header class="header">
             <div class="header-brand">
-                <span class="brand-icon">♪</span>
                 <h1>Mood Melody</h1>
+                <span class="brand-icon">©</span>
             </div>
             <p class="header-subtitle">Intelligent Song Recommendation Engine</p>
             <div class="header-divider"></div>
@@ -41,8 +41,8 @@ $current_page = 'home';
         <!-- Main Content -->
         <main class="main-content">
             <div class="question-section">
-                <h2 class="question-title">Select Your Current Emotional State</h2>
-                <p class="question-desc">Choose the emotion that best describes your mood to receive a curated song recommendation.</p>
+                <h2 class="question-title">How are we feeling today?</h2>
+                <p class="question-desc">Tell us your mood and we'll find out which songs speak you.</p>
             </div>
 
             <!-- Emotion Selection Form -->

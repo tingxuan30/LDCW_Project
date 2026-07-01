@@ -62,8 +62,8 @@ $songs = $recommendationData['songs'];
         <!-- Header -->
         <header class="header">
             <div class="header-brand">
-                <span class="brand-icon">♪</span>
                 <h1>Mood Melody</h1>
+                <span class="brand-icon">©</span>
             </div>
             <p class="header-subtitle">Your Personalized Song Recommendations</p>
             <div class="header-divider"></div>
