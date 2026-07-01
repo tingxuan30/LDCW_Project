@@ -87,7 +87,7 @@ body {
 }
 
 .header-divider {
-    width: 60px;
+    width: 240px;
     height: 3px;
     background: linear-gradient(90deg, #4a6cf7, #7c3aed);
     margin: 14px auto 0;
