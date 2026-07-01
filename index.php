@@ -394,7 +394,7 @@ $current_page = 'home';
                     </button>
                 </div>
                     <button type="button" onclick="showSurprise()" class="emotion-card emotion-uncertain">
-                        <span class="emotion-name">🎲 I'm not sure for today... Surprise me!</span>
+                        <span class="emotion-name">🎲 I'm uncertain for today... Surprise me!</span>
                         <span class="emotion-desc">Get a random song recommendation</span>
                     </button>
             </form>
